@@ -9,7 +9,7 @@ public class MeshGenerator : MonoBehaviour
     public Mesh mesh;
 
     Vector3[,] controlPoints;
-    Vector3[] vertices;
+    public Vector3[] vertices;
     int[] triangles;
 
     //numero di punti valutati per la superficie
