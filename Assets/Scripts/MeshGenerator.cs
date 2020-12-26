@@ -10,6 +10,7 @@ public class MeshGenerator : MonoBehaviour
 
     Vector3[,] controlPoints;
     public Vector3[] vertices;
+    public Vector3[] midPoints;
     int[] triangles;
 
     //numero di punti valutati per la superficie
@@ -79,6 +80,8 @@ public class MeshGenerator : MonoBehaviour
         //crea i vari triangoli
         triangles = new int[xSize * zSize * 6];
 
+        midPoints = new Vector3[xSize * zSize];
+        int anotherindex = 0;
         for (int ti = 0, vi = 0, y = 0; y < zSize; y++, vi++)
         {
             for (int x = 0; x < xSize; x++, ti += 6, vi++)
@@ -87,6 +90,9 @@ public class MeshGenerator : MonoBehaviour
                 triangles[ti + 3] = triangles[ti + 2] = vi + 1;
                 triangles[ti + 4] = triangles[ti + 1] = vi + xSize + 1;
                 triangles[ti + 5] = vi + xSize + 2;
+                
+                midPoints[anotherindex] = (vertices[vi] + vertices[vi+1] + vertices[vi+xSize+1] + vertices[vi+xSize+2]) / 4.0f;
+                anotherindex++;
             }
         }
     }
@@ -147,6 +153,7 @@ public class MeshGenerator : MonoBehaviour
             {
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawSphere(controlPoints[col, row], .1f);
+                
             }
         }
         
