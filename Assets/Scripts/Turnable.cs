@@ -7,6 +7,9 @@ public class Turnable : MonoBehaviour
     private Vector3 posLastFrame;
     private Transform objTransform;
 
+    [SerializeField] private Transform bezierTransform;
+    [SerializeField] private Transform cubeTransform;
+
     private void Awake()
     {
         objTransform = GetComponent<Transform>();
@@ -25,5 +28,12 @@ public class Turnable : MonoBehaviour
             Vector3 axis = Quaternion.AngleAxis(-90f, Vector3.forward) * delta;
             objTransform.rotation = Quaternion.AngleAxis(delta.magnitude * 0.1f, axis) * objTransform.rotation;
         }
+    }
+
+    public void AdjustPosition()
+    {
+        bezierTransform.position = new Vector3(bezierTransform.position.x - cubeTransform.localScale.x / 2, 
+            bezierTransform.position.y - cubeTransform.localScale.y / 2,
+            bezierTransform.position.z - cubeTransform.localScale.z / 2);
     }
 }

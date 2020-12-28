@@ -9,6 +9,8 @@ public class CubeAdjust : MonoBehaviour
     private Bounds b;
     public bool drawSticks = false;
     public int percentage;
+
+    public Turnable turnable;
     
     void Start()
     {
@@ -34,6 +36,7 @@ public class CubeAdjust : MonoBehaviour
         transform.localScale = b.size;
         CalculateVolume();
 
+        turnable.AdjustPosition();
     }
 
     void CalculateVolume()
