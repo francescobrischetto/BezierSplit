@@ -31,6 +31,7 @@ public class MeshGenerator : MonoBehaviour
         //aggiorno la mesh
         UpdateMesh();
 
+        transform.position = new Vector3(0,0,0);
     } 
 
 
@@ -40,7 +41,7 @@ public class MeshGenerator : MonoBehaviour
         int grade = 3;
         controlPoints = new Vector3[grade+1, grade+1];
         //Questa y verrà modificata nel cubo
-        int y = 2;
+        int y = 0;
         for(int i = 0; i <= grade; i++)
         {
             for(int j=0; j<=grade; j++)

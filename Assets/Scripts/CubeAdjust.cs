@@ -9,11 +9,21 @@ public class CubeAdjust : MonoBehaviour
     private Bounds b;
     public bool drawSticks = false;
     public int percentage;
-    // Start is called before the first frame update
+    
     void Start()
     {
         BezierSurfaceScript = BezierSurface.GetComponent<MeshGenerator>();
         StartCoroutine(waiter());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        /*
+        b = BezierSurfaceScript.mesh.bounds;
+        transform.position = b.center;
+        transform.localScale = b.size;
+        Debug.Log(b);*/
     }
 
     IEnumerator waiter()
@@ -108,15 +118,5 @@ public class CubeAdjust : MonoBehaviour
         lr.positionCount = positions.Length;
         lr.SetPositions(positions);
         lr.startWidth = 0.01f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        b = BezierSurfaceScript.mesh.bounds;
-        transform.position = b.center;
-        transform.localScale = b.size;
-        Debug.Log(b);*/
     }
 }
