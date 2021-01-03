@@ -7,6 +7,8 @@ public class Turnable : MonoBehaviour
     private Vector3 posLastFrame;
     private Transform objTransform;
 
+    public GameObject cube;
+
     [SerializeField] private Transform bezierTransform;
     [SerializeField] private Transform cubeTransform;
 
@@ -32,8 +34,10 @@ public class Turnable : MonoBehaviour
 
     public void AdjustPosition()
     {
-        bezierTransform.position = new Vector3(bezierTransform.position.x - cubeTransform.localScale.x / 2, 
-            bezierTransform.position.y - cubeTransform.localScale.y / 2,
-            bezierTransform.position.z - cubeTransform.localScale.z / 2);
+        //TODO: Fixare il centro della scena
+        bezierTransform.position = new Vector3(bezierTransform.position.x - cubeTransform.localScale.x/2 , 
+             bezierTransform.position.y - cubeTransform.localScale.y/2 ,
+             bezierTransform.position.z - cubeTransform.localScale.z/2 );
+        //(Possibile Hint che non funziona però) : bezierTransform.position = cube.GetComponent<MeshFilter>().mesh.bounds.center;
     }
 }
