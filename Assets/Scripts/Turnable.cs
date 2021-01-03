@@ -5,17 +5,10 @@ using UnityEngine;
 public class Turnable : MonoBehaviour
 {
     private Vector3 posLastFrame;
-    private Transform objTransform;
+    private Vector3 offset;
 
-    public GameObject cube;
-
-    [SerializeField] private Transform bezierTransform;
     [SerializeField] private Transform cubeTransform;
-
-    private void Awake()
-    {
-        objTransform = GetComponent<Transform>();
-    }
+    [SerializeField] private Transform surface;
 
     private void Update()
     {
@@ -28,16 +21,16 @@ public class Turnable : MonoBehaviour
             posLastFrame = Input.mousePosition;
 
             Vector3 axis = Quaternion.AngleAxis(-90f, Vector3.forward) * delta;
-            objTransform.rotation = Quaternion.AngleAxis(delta.magnitude * 0.1f, axis) * objTransform.rotation;
+            //rotationPivot.rotation = Quaternion.AngleAxis(delta.magnitude * 0.1f, axis) * rotationPivot.rotation;
+            surface.RotateAround(cubeTransform.position, axis, delta.magnitude * 0.1f);
         }
     }
 
     public void AdjustPosition()
     {
-        //TODO: Fixare il centro della scena
-        bezierTransform.position = new Vector3(bezierTransform.position.x - cubeTransform.localScale.x/2 , 
-             bezierTransform.position.y - cubeTransform.localScale.y/2 ,
-             bezierTransform.position.z - cubeTransform.localScale.z/2 );
-        //(Possibile Hint che non funziona però) : bezierTransform.position = cube.GetComponent<MeshFilter>().mesh.bounds.center;
+        offset = new Vector3(cubeTransform.position.x, cubeTransform.position.y, cubeTransform.position.z);
+        surface.position = new Vector3(surface.position.x - cubeTransform.position.x,
+            surface.position.y - cubeTransform.position.y,
+            surface.position.z - cubeTransform.position.z);
     }
 }
