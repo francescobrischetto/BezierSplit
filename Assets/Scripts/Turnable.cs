@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Turnable : MonoBehaviour
 {
+    private Transform sceneCenter;
     private Vector3 posLastFrame;
-    private Vector3 offset;
 
     [SerializeField] private Transform cubeTransform;
     [SerializeField] private Transform surface;
@@ -28,7 +28,6 @@ public class Turnable : MonoBehaviour
 
     public void AdjustPosition()
     {
-        offset = new Vector3(cubeTransform.position.x, cubeTransform.position.y, cubeTransform.position.z);
         surface.position = new Vector3(surface.position.x - cubeTransform.position.x,
             surface.position.y - cubeTransform.position.y,
             surface.position.z - cubeTransform.position.z);
