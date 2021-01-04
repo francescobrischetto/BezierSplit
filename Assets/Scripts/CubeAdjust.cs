@@ -5,6 +5,7 @@ using UnityEngine;
 public class CubeAdjust : MonoBehaviour
 {
     public Mesh volumeMesh;
+    public Mesh volumeMesh1;
     private int[] v_triangles;
     private Vector3[] v_vertices;
 
@@ -43,6 +44,7 @@ public class CubeAdjust : MonoBehaviour
     void Start()
     {
         volumeMesh = new Mesh();
+        volumeMesh1 = new Mesh();
         BezierSurfaceScript = BezierSurface.GetComponent<MeshGenerator>();
         StartCoroutine(waiter());
     }
@@ -185,36 +187,49 @@ public class CubeAdjust : MonoBehaviour
 
 
         //***TRIAL UNIFIED
-        CombineInstance[] combine = new CombineInstance[midPoints.Length];
+        CombineInstance[] combine = new CombineInstance[midPoints.Length/2+1];
+        CombineInstance[] combine1 = new CombineInstance[midPoints.Length/2+1];
         List<Vector3> points = new List<Vector3>();
+        int index1=0, index2 = 0;
         for (int i = 0; i < midPoints.Length; i++)
         {
-            //if (i % 2 == 0)
+            
+            float xm = midPoints[i].x;
+            float ym = midPoints[i].y;
+            float zm = midPoints[i].z;
+            points.Add(new Vector3(xm - xStep / 2, y, zm - zStep / 2));
+            points.Add(new Vector3(xm + xStep / 2, y, zm - zStep / 2));
+            points.Add(new Vector3(xm + xStep / 2, ym, zm - zStep / 2));
+            points.Add(new Vector3(xm - xStep / 2, ym, zm - zStep / 2));
+            points.Add(new Vector3(xm - xStep / 2, ym, zm + zStep / 2));
+            points.Add(new Vector3(xm + xStep / 2, ym, zm + zStep / 2));
+            points.Add(new Vector3(xm + xStep / 2, y, zm + zStep / 2));
+            points.Add(new Vector3(xm - xStep / 2, y, zm + zStep / 2));
+
+            Mesh m = new Mesh();
+            m.vertices = (Vector3[])points.ToArray().Clone();
+            m.triangles = (int[])v_triangles.Clone();
+            if (i % 2 == 0)
             {
-                float xm = midPoints[i].x;
-                float ym = midPoints[i].y;
-                float zm = midPoints[i].z;
-                points.Add(new Vector3(xm - xStep / 2, y, zm - zStep / 2));
-                points.Add(new Vector3(xm + xStep / 2, y, zm - zStep / 2));
-                points.Add(new Vector3(xm + xStep / 2, ym, zm - zStep / 2));
-                points.Add(new Vector3(xm - xStep / 2, ym, zm - zStep / 2));
-                points.Add(new Vector3(xm - xStep / 2, ym, zm + zStep / 2));
-                points.Add(new Vector3(xm + xStep / 2, ym, zm + zStep / 2));
-                points.Add(new Vector3(xm + xStep / 2, y, zm + zStep / 2));
-                points.Add(new Vector3(xm - xStep / 2, y, zm + zStep / 2));
+                combine[index1].mesh = m;
+                combine[index1].transform = BezierSurface.transform.localToWorldMatrix;
+                index1++;
 
-                Mesh m = new Mesh();
-                m.vertices = (Vector3[])points.ToArray().Clone();
-                m.triangles = (int[])v_triangles.Clone();
 
-                combine[i].mesh = m;
-                combine[i].transform = BezierSurface.transform.localToWorldMatrix;
-                points.Clear();
             }
+            else
+            {
+                combine1[index2].mesh = m;
+                combine1[index2].transform = BezierSurface.transform.localToWorldMatrix;
+                index2++;
+            }
+            points.Clear();
 
         }
 
         volumeMesh = new Mesh();
         volumeMesh.CombineMeshes(combine);
+        volumeMesh1 = new Mesh();
+        volumeMesh1.CombineMeshes(combine1);
     }
 }
