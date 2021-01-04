@@ -12,6 +12,7 @@ public class Turnable : MonoBehaviour
 
     private void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
             posLastFrame = Input.mousePosition;
 
