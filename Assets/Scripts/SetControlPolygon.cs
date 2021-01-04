@@ -16,6 +16,11 @@ public class SetControlPolygon : MonoBehaviour
         StartCoroutine(waiter());
     }
 
+    public void SetVisible(bool v)
+    {
+        visible = v;
+    }
+
     IEnumerator waiter()
     {
         yield return new WaitForSecondsRealtime(0.01f);

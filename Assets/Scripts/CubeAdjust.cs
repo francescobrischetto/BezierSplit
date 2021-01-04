@@ -15,6 +15,7 @@ public class CubeAdjust : MonoBehaviour
 
     //Percentuale di volume riempita
     public int percentage;
+    public int margin = 5;
 
     //Numero di scarto del taglio della superficie
     public int cutPrecision = 15;
