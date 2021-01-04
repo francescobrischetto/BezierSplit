@@ -43,6 +43,7 @@ public class CubeAdjust : MonoBehaviour
     void Start()
     {
         volumeMesh = new Mesh();
+        volumeMesh1 = new Mesh();
         BezierSurfaceScript = BezierSurface.GetComponent<MeshGenerator>();
         StartCoroutine(waiter());
     }
@@ -161,5 +162,7 @@ public class CubeAdjust : MonoBehaviour
         //unisco le mesh di tutti gli stick
         volumeMesh = new Mesh();
         volumeMesh.CombineMeshes(combine);
+        volumeMesh1 = new Mesh();
+        volumeMesh1.CombineMeshes(combine1);
     }
 }
