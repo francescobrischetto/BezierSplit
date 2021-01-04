@@ -6,10 +6,11 @@ public class SetVolumeVisualizer : MonoBehaviour
 {
     public GameObject cube;
     private CubeAdjust cubeScript;
+
     public bool visible = false;
-    Mesh m;
-    public int[] t;
-    public Vector3[] v;
+    private Mesh m;
+    public int[] triangles;
+    public Vector3[] vertices;
 
     // Start is called before the first frame update
     void Start()
@@ -25,20 +26,13 @@ public class SetVolumeVisualizer : MonoBehaviour
 
     IEnumerator waiter()
     {
-        yield return new WaitForSecondsRealtime(0.1f);
+        yield return new WaitForSecondsRealtime(0.03f);
         m =cubeScript.volumeMesh;
         if (visible) GetComponent<MeshFilter>().mesh = m;
-        v = m.vertices;
-        t = m.triangles;
-        //aggiorna la mesh
-        /*m.Clear();
-        m.vertices = cubeScript.v_vertices;
-        m.triangles = cubeScript.v_triangles;
-        
-        m.RecalculateNormals();*/
+        vertices = m.vertices;
+        triangles = m.triangles;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (visible) GetComponent<MeshFilter>().mesh = m;

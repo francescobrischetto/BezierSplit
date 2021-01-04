@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CubeAdjust : MonoBehaviour
 {
-    public Mesh volumeMesh;
-    private int[] v_triangles;
-    private Vector3[] v_vertices;
 
     //linking con gli altri script
     public GameObject BezierSurface;
@@ -16,7 +13,10 @@ public class CubeAdjust : MonoBehaviour
 
     //Percentuale di volume riempita
     public int percentage;
-    
+
+    //La mesh del volume usata dal visualizzatore del volume
+    public Mesh volumeMesh;
+
     //Margin gestirà la difficoltà del gioco!
     public enum Margin
     {
@@ -74,7 +74,6 @@ public class CubeAdjust : MonoBehaviour
         bool sign = Random.Range(0, 1000) % 2==0 ? true : false;
         if(sign) offset = -offset;
         transform.position = bc.center + new Vector3(0,offset,0);
-
         transform.localScale = bc.size;
         //Chiamo il metodo della superficie di bezier per mostrare solo il "taglio"
         BezierSurfaceScript.CreateCut(bc);
@@ -108,92 +107,39 @@ public class CubeAdjust : MonoBehaviour
         Debug.Log("Total Cube Volume: " + totalVolume);
         Debug.Log("Calculated Volume: " + volume);
         Debug.Log("Percentage: " + percentage + " %");
-        onDrawSticks(midPoints, BezierSurfaceScript.xSize, BezierSurfaceScript.zSize);
+        CalculateSticks(midPoints, BezierSurfaceScript.xSize, BezierSurfaceScript.zSize);
     }
     
-    void onDrawSticks(Vector3[] midPoints, int xSize, int zSize) 
+    void CalculateSticks(Vector3[] midPoints, int xSize, int zSize) 
     {
-        float x = this.transform.position.x - this.transform.localScale.x / 2;
+        //Y della base del cubo
         float y = this.transform.position.y - this.transform.localScale.y / 2;
-        float z = this.transform.position.z - this.transform.localScale.z / 2;
-        //triangoli per visualizzare un cubo
+        //indici dei triangoli necessari per visualizzare un singolo stick
         int[] triangles = {
-            0, 2, 1, //face front
-	        0, 3, 2,
-            2, 3, 4, //face top
-	        2, 4, 5,
-            1, 2, 5, //face right
-	        1, 5, 6,
-            0, 7, 4, //face left
-	        0, 4, 3,
-            5, 4, 7, //face back
-	        5, 7, 6,
-            0, 6, 7, //face bottom
-	        0, 1, 6
+            0, 2, 1, 0, 3, 2,//face front
+            2, 3, 4, 2, 4, 5, //face top
+            1, 2, 5, 1, 5, 6,//face right
+            0, 7, 4, 0, 4, 3,//face left
+            5, 4, 7, 5, 7, 6,//face back
+            0, 6, 7, 0, 1, 6//face bottom
         };
-
-
-        /*SOLO GRIGLIE 
-        int[] triangles =
-        {
-            0, 2, 3,
-            0, 1, 2
-        };*/
-        v_triangles = (int [])triangles.Clone();
+        //le dimensioni del taglio
         float newxSize = xSize - cutPrecision * 2;
         float newzSize = zSize - cutPrecision * 2;
+        //le dimensioni orizzontali dello stick
         float xStep = (this.transform.localScale.x / newxSize);
         float zStep = (this.transform.localScale.z / newzSize);
-
-        //***SEPARATED
-        /*CombineInstance[] combine = new CombineInstance[2*midPoints.Length];
-        List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < midPoints.Length; i++)
-        {
-            float xm = midPoints[i].x;
-            float ym = midPoints[i].y;
-            float zm = midPoints[i].z;
-            points.Add(new Vector3(xm - xStep / 2, ym, zm - zStep / 2));
-            points.Add(new Vector3(xm + xStep / 2, ym, zm - zStep / 2));
-            points.Add(new Vector3(xm + xStep / 2, ym, zm + zStep / 2));
-            points.Add(new Vector3(xm - xStep / 2, ym, zm + zStep / 2));
-            Mesh m = new Mesh();
-            m.vertices = (Vector3[])points.ToArray().Clone();
-            m.triangles = (int[])v_triangles.Clone();
-            combine[i].mesh = m;
-            combine[i].transform = BezierSurface.transform.localToWorldMatrix;
-            points.Clear();
-
-        }
-
-        for (int i = 0; i < midPoints.Length; i++)
-        {
-            float xm = midPoints[i].x;
-            float zm = midPoints[i].z;
-            points.Add(new Vector3(xm - xStep / 2, y, zm - zStep / 2));
-            points.Add(new Vector3(xm + xStep / 2, y, zm - zStep / 2));
-            points.Add(new Vector3(xm + xStep / 2, y, zm + zStep / 2));
-            points.Add(new Vector3(xm - xStep / 2, y, zm + zStep / 2));
-            Mesh m = new Mesh();
-            m.vertices = (Vector3[])points.ToArray().Clone();
-            m.triangles = (int[])v_triangles.Clone();
-            combine[i].mesh = m;
-            combine[i].transform = BezierSurface.transform.localToWorldMatrix;
-            points.Clear();
-
-        }*/
-
-
-        //***TRIAL UNIFIED
+        //combine serve per unire insieme più mesh
         CombineInstance[] combine = new CombineInstance[midPoints.Length];
         List<Vector3> points = new List<Vector3>();
+
         for (int i = 0; i < midPoints.Length; i++)
         {
-            //if (i % 2 == 0)
-            {
+                //la posizione del midpoint che stiamo considerando
                 float xm = midPoints[i].x;
                 float ym = midPoints[i].y;
                 float zm = midPoints[i].z;
+                //aggiungo gli 8 vertici dello stick
                 points.Add(new Vector3(xm - xStep / 2, y, zm - zStep / 2));
                 points.Add(new Vector3(xm + xStep / 2, y, zm - zStep / 2));
                 points.Add(new Vector3(xm + xStep / 2, ym, zm - zStep / 2));
@@ -202,18 +148,17 @@ public class CubeAdjust : MonoBehaviour
                 points.Add(new Vector3(xm + xStep / 2, ym, zm + zStep / 2));
                 points.Add(new Vector3(xm + xStep / 2, y, zm + zStep / 2));
                 points.Add(new Vector3(xm - xStep / 2, y, zm + zStep / 2));
-
+                //creo la mesh dello stick 
                 Mesh m = new Mesh();
                 m.vertices = (Vector3[])points.ToArray().Clone();
-                m.triangles = (int[])v_triangles.Clone();
-
+                m.triangles = (int[])triangles.Clone();
+                //la aggiungo alle mesh che dovranno essere unite
                 combine[i].mesh = m;
                 combine[i].transform = BezierSurface.transform.localToWorldMatrix;
                 points.Clear();
-            }
 
         }
-
+        //unisco le mesh di tutti gli stick
         volumeMesh = new Mesh();
         volumeMesh.CombineMeshes(combine);
     }

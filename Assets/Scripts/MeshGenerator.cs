@@ -55,8 +55,8 @@ public class MeshGenerator : MonoBehaviour
             {
                 float xNoise = i + Random.Range(-.5f, .2f);
                 float zNoise = j + Random.Range(-.5f, .2f);
-
                 float yNoise = y + Random.Range(-.5f, 1f);
+                //Sposto di molto l'altezza dei punti di controllo in base alla difficoltà attuale
                 if (cube.GetComponent<CubeAdjust>().margin < CubeAdjust.Margin.Easy)
                 {
                     yNoise += Random.Range(1f, 1.5f);
@@ -67,11 +67,6 @@ public class MeshGenerator : MonoBehaviour
                     bool sign = Random.Range(0, 1000) % 2 == 0 ? true : false;
                     if (sign) yNoise = -yNoise;
                 }
-                //normalizzazione ? valutare se tenerla o no
-                /*xNoise = Normalize(xNoise, -.5f, 3.2f, 0, 3);
-                yNoise = Normalize(yNoise, -.5f, 4, 0, 3);
-                zNoise = Normalize(zNoise, -.5f, 3.2f, 0, 3);*/
-
                 controlPoints[i, j] = new Vector3(xNoise,yNoise,zNoise);
                 //Linearizzo i punti di controllo in un vettore unidimensionale
                 linearControlPoints[k] = controlPoints[i, j];
@@ -81,12 +76,6 @@ public class MeshGenerator : MonoBehaviour
         //Calcolo i triangoli da visualizzare per disegnare il poligono di controllo
         controlTriangles = calculateTriangles(grade, grade);
 
-    }
-
-    //funzione di normalizzazione
-    float Normalize(float val, float valmin, float valmax, float min, float max)
-    {
-        return (((val - valmin) / (valmax - valmin)) * (max - min)) + min;
     }
 
     Vector3[] calculateVertices(int startX, int startZ, int limX, int limZ)

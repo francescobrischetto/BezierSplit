@@ -1921,7 +1921,7 @@ MonoBehaviour:
   volumeMesh: {fileID: 0}
   BezierSurface: {fileID: 1279879343}
   percentage: 0
-  margin: 3
+  margin: 5
   cutPrecision: 15
   turnable: {fileID: 1686333444}
 --- !u!1 &963194225
@@ -3415,7 +3415,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 002bf513f4954dc4fb9c3e5a8606ee92, type: 2}
+  - {fileID: 2100000, guid: c5f5145e011b1af4bb9cb07f609aa44e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
