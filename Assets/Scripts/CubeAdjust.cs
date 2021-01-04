@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class CubeAdjust : MonoBehaviour
 {
+    public Mesh volumeMesh;
+    private int[] v_triangles;
+    private Vector3[] v_vertices;
+
     //linking con gli altri script
     public GameObject BezierSurface;
     private MeshGenerator BezierSurfaceScript;
     private Bounds b;
     private Bounds bc;
-
-    //Boolean per disegnare gli sticks
-    public bool drawSticks = false;
 
     //Percentuale di volume riempita
     public int percentage;
@@ -41,6 +42,7 @@ public class CubeAdjust : MonoBehaviour
     
     void Start()
     {
+        volumeMesh = new Mesh();
         BezierSurfaceScript = BezierSurface.GetComponent<MeshGenerator>();
         StartCoroutine(waiter());
     }
@@ -106,65 +108,113 @@ public class CubeAdjust : MonoBehaviour
         Debug.Log("Total Cube Volume: " + totalVolume);
         Debug.Log("Calculated Volume: " + volume);
         Debug.Log("Percentage: " + percentage + " %");
-        //TODO:FIXARLO
-        if(drawSticks)  onDrawSticks(midPoints, BezierSurfaceScript.xSize, BezierSurfaceScript.zSize);
+        onDrawSticks(midPoints, BezierSurfaceScript.xSize, BezierSurfaceScript.zSize);
     }
     
-    //TODO: FIXARLO
     void onDrawSticks(Vector3[] midPoints, int xSize, int zSize) 
     {
         float x = this.transform.position.x - this.transform.localScale.x / 2;
         float y = this.transform.position.y - this.transform.localScale.y / 2;
         float z = this.transform.position.z - this.transform.localScale.z / 2;
-        LineRenderer lr = gameObject.AddComponent<LineRenderer>();
-        lr.material = new Material(Shader.Find("Sprites/Default"));
-        Vector3[] positions = new Vector3[2*5*(xSize)*(zSize)];
+        //triangoli per visualizzare un cubo
+        int[] triangles = {
+            0, 2, 1, //face front
+	        0, 3, 2,
+            2, 3, 4, //face top
+	        2, 4, 5,
+            1, 2, 5, //face right
+	        1, 5, 6,
+            0, 7, 4, //face left
+	        0, 4, 3,
+            5, 4, 7, //face back
+	        5, 7, 6,
+            0, 6, 7, //face bottom
+	        0, 1, 6
+        };
 
-        float xStep = transform.localScale.x / xSize;
-        float zStep = transform.localScale.z / zSize;
-        int index = 0;
-        //griglia di base
-        for ( int j = 1; j <= xSize; j++)
+
+        /*SOLO GRIGLIE 
+        int[] triangles =
         {
-            for(int i=1; i<= zSize; i++)
-            {
-                float newx = x + i * xStep;
-                float newz = z + j * zStep;
-                positions[index] = new Vector3(newx-xStep,y, newz - zStep);
-                index++;
-                positions[index] = new Vector3(newx, y, newz - zStep);
-                index++;
-                positions[index] = new Vector3(newx, y, newz);
-                index++;
-                positions[index] = new Vector3(newx - xStep, y, newz);
-                index++;
-                positions[index] = new Vector3(newx - xStep, y, newz - zStep);
-                index++;
-            }
-        }
-        //griglia di piano
-        int altroindex = 0;
-        for (int j = 1; j <= xSize; j++)
+            0, 2, 3,
+            0, 1, 2
+        };*/
+        v_triangles = (int [])triangles.Clone();
+        float newxSize = xSize - cutPrecision * 2;
+        float newzSize = zSize - cutPrecision * 2;
+        float xStep = (this.transform.localScale.x / newxSize);
+        float zStep = (this.transform.localScale.z / newzSize);
+
+        //***SEPARATED
+        /*CombineInstance[] combine = new CombineInstance[2*midPoints.Length];
+        List<Vector3> points = new List<Vector3>();
+        for (int i = 0; i < midPoints.Length; i++)
         {
-            for (int i = 1; i <= zSize; i++)
-            {
-                float newx = x + i * xStep;
-                float newz = z + j * zStep;
-                positions[index] = new Vector3(newx - xStep, midPoints[altroindex].y, newz - zStep);
-                index++;
-                positions[index] = new Vector3(newx, midPoints[altroindex].y, newz - zStep);
-                index++;
-                positions[index] = new Vector3(newx, midPoints[altroindex].y, newz);
-                index++;
-                positions[index] = new Vector3(newx - xStep, midPoints[altroindex].y, newz);
-                index++;
-                positions[index] = new Vector3(newx - xStep, midPoints[altroindex].y, newz - zStep);
-                index++;
-                altroindex++;
-            }
+            float xm = midPoints[i].x;
+            float ym = midPoints[i].y;
+            float zm = midPoints[i].z;
+            points.Add(new Vector3(xm - xStep / 2, ym, zm - zStep / 2));
+            points.Add(new Vector3(xm + xStep / 2, ym, zm - zStep / 2));
+            points.Add(new Vector3(xm + xStep / 2, ym, zm + zStep / 2));
+            points.Add(new Vector3(xm - xStep / 2, ym, zm + zStep / 2));
+            Mesh m = new Mesh();
+            m.vertices = (Vector3[])points.ToArray().Clone();
+            m.triangles = (int[])v_triangles.Clone();
+            combine[i].mesh = m;
+            combine[i].transform = BezierSurface.transform.localToWorldMatrix;
+            points.Clear();
+
         }
-        lr.positionCount = positions.Length;
-        lr.SetPositions(positions);
-        lr.startWidth = 0.01f;
+
+        for (int i = 0; i < midPoints.Length; i++)
+        {
+            float xm = midPoints[i].x;
+            float zm = midPoints[i].z;
+            points.Add(new Vector3(xm - xStep / 2, y, zm - zStep / 2));
+            points.Add(new Vector3(xm + xStep / 2, y, zm - zStep / 2));
+            points.Add(new Vector3(xm + xStep / 2, y, zm + zStep / 2));
+            points.Add(new Vector3(xm - xStep / 2, y, zm + zStep / 2));
+            Mesh m = new Mesh();
+            m.vertices = (Vector3[])points.ToArray().Clone();
+            m.triangles = (int[])v_triangles.Clone();
+            combine[i].mesh = m;
+            combine[i].transform = BezierSurface.transform.localToWorldMatrix;
+            points.Clear();
+
+        }*/
+
+
+        //***TRIAL UNIFIED
+        CombineInstance[] combine = new CombineInstance[midPoints.Length];
+        List<Vector3> points = new List<Vector3>();
+        for (int i = 0; i < midPoints.Length; i++)
+        {
+            //if (i % 2 == 0)
+            {
+                float xm = midPoints[i].x;
+                float ym = midPoints[i].y;
+                float zm = midPoints[i].z;
+                points.Add(new Vector3(xm - xStep / 2, y, zm - zStep / 2));
+                points.Add(new Vector3(xm + xStep / 2, y, zm - zStep / 2));
+                points.Add(new Vector3(xm + xStep / 2, ym, zm - zStep / 2));
+                points.Add(new Vector3(xm - xStep / 2, ym, zm - zStep / 2));
+                points.Add(new Vector3(xm - xStep / 2, ym, zm + zStep / 2));
+                points.Add(new Vector3(xm + xStep / 2, ym, zm + zStep / 2));
+                points.Add(new Vector3(xm + xStep / 2, y, zm + zStep / 2));
+                points.Add(new Vector3(xm - xStep / 2, y, zm + zStep / 2));
+
+                Mesh m = new Mesh();
+                m.vertices = (Vector3[])points.ToArray().Clone();
+                m.triangles = (int[])v_triangles.Clone();
+
+                combine[i].mesh = m;
+                combine[i].transform = BezierSurface.transform.localToWorldMatrix;
+                points.Clear();
+            }
+
+        }
+
+        volumeMesh = new Mesh();
+        volumeMesh.CombineMeshes(combine);
     }
 }
