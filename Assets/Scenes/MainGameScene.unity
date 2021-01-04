@@ -1463,7 +1463,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c6126a7f5e5e9894891f3ae1e155d797, type: 2}
+  - {fileID: 2100000, guid: 8e4c144749e0eae40825356df12943d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1923,9 +1923,7 @@ MonoBehaviour:
   percentage: 0
   margin: 5
   cutPrecision: 15
-  dimension: 1.2
-  minRange: 0.2
-  maxRange: 0.2
+  dimension: 0.8
   turnable: {fileID: 1686333444}
 --- !u!1 &963194225
 GameObject:
@@ -2004,7 +2002,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 1.48, z: -3.5}
+  m_LocalPosition: {x: 0, y: 2.79, z: -7.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2242,7 +2240,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8e4c144749e0eae40825356df12943d5, type: 2}
+  - {fileID: 2100000, guid: c6126a7f5e5e9894891f3ae1e155d797, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -54,12 +54,24 @@ public class MeshGenerator : MonoBehaviour
             for(int j=0; j<=grade; j++)
             {
                 float xNoise = i + Random.Range(-.5f, .2f);
-                float yNoise = y + Random.Range(-.5f, 1f);
                 float zNoise = j + Random.Range(-.5f, .2f);
-                //normalizzazione
-                xNoise = Normalize(xNoise, -.5f, 3.2f, 0, 3);
+
+                float yNoise = y + Random.Range(-.5f, 1f);
+                if (cube.GetComponent<CubeAdjust>().margin < CubeAdjust.Margin.Easy)
+                {
+                    yNoise += Random.Range(1f, 1.5f);
+                    if (cube.GetComponent<CubeAdjust>().margin == CubeAdjust.Margin.Hard)
+                    {
+                        yNoise += Random.Range(1f, 1.5f);
+                    }
+                    bool sign = Random.Range(0, 1000) % 2 == 0 ? true : false;
+                    if (sign) yNoise = -yNoise;
+                }
+                //normalizzazione ? valutare se tenerla o no
+                /*xNoise = Normalize(xNoise, -.5f, 3.2f, 0, 3);
                 yNoise = Normalize(yNoise, -.5f, 4, 0, 3);
-                zNoise = Normalize(zNoise, -.5f, 3.2f, 0, 3);
+                zNoise = Normalize(zNoise, -.5f, 3.2f, 0, 3);*/
+
                 controlPoints[i, j] = new Vector3(xNoise,yNoise,zNoise);
                 //Linearizzo i punti di controllo in un vettore unidimensionale
                 linearControlPoints[k] = controlPoints[i, j];

@@ -9,7 +9,8 @@ public class CheckPercentage : MonoBehaviour
     public CubeAdjust c;
     public void OnClickCheckPercentage()
     {
-        if ((s.value >= c.percentage - c.margin && s.value <= c.percentage + c.margin) || (100 - s.value >= c.percentage - c.margin && 100 - s.value <= c.percentage + c.margin))
+        if ((s.value >= c.percentage - (int) c.margin && s.value <= c.percentage + (int)c.margin) || 
+            (100 - s.value >= c.percentage - (int)c.margin && 100 - s.value <= c.percentage + (int)c.margin))
         {
             Debug.Log("Win");
         }

@@ -15,17 +15,26 @@ public class CubeAdjust : MonoBehaviour
 
     //Percentuale di volume riempita
     public int percentage;
-    public int margin = 5;
+    
+    //Margin gestirà la difficoltà del gioco!
+    public enum Margin
+    {
+        Easy = 5,
+        Medium = 4,
+        Hard = 3,
+        Impossible = 1
+    }
+    //TODO: Considera static?
+    public Margin margin = Margin.Easy;
 
     //Numero di scarto del taglio della superficie
     public int cutPrecision = 15;
 
     //dimensione del parallelepipedo
-    public float dimension = 1.2f;
+    private float dimension = 0.8f;
 
     //min-max Range per aumento di difficoltà
-    public float minRange = 0.2f;
-    public float maxRange = 0.2f;
+    private float Range = 0.2f;
 
     //Turnable per centrare la visuale
     public Turnable turnable;
@@ -49,9 +58,21 @@ public class CubeAdjust : MonoBehaviour
         //Qui randomizzo la Y
         float randomizeY = b.size.y + dimension;
         bc = new Bounds(b.center,new Vector3(System.Math.Abs(first.x- second.x), randomizeY, System.Math.Abs(first.z - second.z)));
-        //Riposiziono il cubo 
-        //TODO: modificare questo in una scelta di difficoltà di livello
-        transform.position = bc.center + new Vector3(0,Random.Range(-minRange,maxRange),0);
+        
+        //Riposiziono il cubo in base alla difficoltà attuale
+        float offset = Random.Range(0, Range);
+        if (margin < Margin.Easy)
+        {
+            offset += Random.Range(0, Range);
+            if (margin == Margin.Hard)
+            {
+                offset += Random.Range(0, Range);
+            }
+        }
+        bool sign = Random.Range(0, 1000) % 2==0 ? true : false;
+        if(sign) offset = -offset;
+        transform.position = bc.center + new Vector3(0,offset,0);
+
         transform.localScale = bc.size;
         //Chiamo il metodo della superficie di bezier per mostrare solo il "taglio"
         BezierSurfaceScript.CreateCut(bc);
