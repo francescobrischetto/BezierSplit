@@ -79,7 +79,7 @@ public class CubeAdjust : MonoBehaviour
         BezierSurfaceScript.CreateCut(bc);
 
         //Aggiusto la posizione della visuale
-        turnable.AdjustPosition();
+        //turnable.AdjustPosition();
     }
 
     public void CalculateVolume()
@@ -161,5 +161,25 @@ public class CubeAdjust : MonoBehaviour
         //unisco le mesh di tutti gli stick
         volumeMesh = new Mesh();
         volumeMesh.CombineMeshes(combine);
+    }
+
+    public void SetEasy()
+    {
+        margin = Margin.Easy;
+    }
+
+    public void SetMedium()
+    {
+        margin = Margin.Medium;
+    }
+
+    public void SetHard()
+    {
+        margin = Margin.Hard;
+    }
+
+    public void SetImpossible()
+    {
+        margin = Margin.Impossible;
     }
 }

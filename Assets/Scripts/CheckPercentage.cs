@@ -5,16 +5,26 @@ using UnityEngine.UI;
 
 public class CheckPercentage : MonoBehaviour
 {
-    public Slider s;
-    public CubeAdjust c;
+    [SerializeField] private Slider _slider;
+    [SerializeField] private GameManager _manager;
+    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private GameObject _losePanel;
+
     public void OnClickCheckPercentage()
     {
-        if ((s.value >= c.percentage - (int) c.margin && s.value <= c.percentage + (int)c.margin) || 
-            (100 - s.value >= c.percentage - (int)c.margin && 100 - s.value <= c.percentage + (int)c.margin))
+        CubeAdjust cubeAdj = GameObject.FindGameObjectWithTag("Cube").GetComponent<CubeAdjust>();
+
+        if ((_slider.value >= cubeAdj.percentage - (int)cubeAdj.margin && _slider.value <= cubeAdj.percentage + (int)cubeAdj.margin) ||
+            (100 - _slider.value >= cubeAdj.percentage - (int)cubeAdj.margin && 100 - _slider.value <= cubeAdj.percentage + (int)cubeAdj.margin))
         {
+            _winPanel.SetActive(true);
             Debug.Log("Win");
         }
-        else Debug.Log("Lose");
+        else
+        {
+            _losePanel.SetActive(true);
+            Debug.Log("Lose");
+        }
     }
 
 }

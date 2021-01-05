@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Turnable : MonoBehaviour
 {
-    private Transform sceneCenter;
     private Vector3 posLastFrame;
 
     [SerializeField] private Transform cubeTransform;
