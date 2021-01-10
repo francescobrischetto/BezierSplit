@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,9 @@ public class CheckPercentage : MonoBehaviour
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _losePanel;
 
+    [SerializeField] private TextMeshProUGUI _winPerc;
+    [SerializeField] private TextMeshProUGUI _losePerc;
+
     public void OnClickCheckPercentage()
     {
         CubeAdjust cubeAdj = GameObject.FindGameObjectWithTag("Cube").GetComponent<CubeAdjust>();
@@ -18,13 +22,17 @@ public class CheckPercentage : MonoBehaviour
             (100 - _slider.value >= cubeAdj.percentage - (int)cubeAdj.margin && 100 - _slider.value <= cubeAdj.percentage + (int)cubeAdj.margin))
         {
             _winPanel.SetActive(true);
-            Debug.Log("Win");
         }
         else
         {
             _losePanel.SetActive(true);
-            Debug.Log("Lose");
         }
     }
 
+    public void OnClickPercentageSetText()
+    {
+        int perc = FindObjectOfType<CubeAdjust>().percentage;
+        _winPerc.SetText("La percentuale era: " + perc + "%");
+        _losePerc.SetText("La percentuale era: " + perc + "%");
+    }
 }

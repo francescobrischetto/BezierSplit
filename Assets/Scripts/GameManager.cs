@@ -2,27 +2,50 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private int _currentLevel;
+    private int _highScore;
     private GameObject _currentSurface;
 
-    [SerializeField] private TextMeshProUGUI _levelText;
+    [SerializeField] private TextMeshProUGUI _currentScoreText;
+    [SerializeField] private TextMeshProUGUI _highScoreText;
     [SerializeField] private Transform _sceneCenter;
     [SerializeField] private GameObject _surfacePrefab;
+    [SerializeField] private GameObject _exitWindow;
 
     private void Start()
     {
         RestartGame();
+        _highScore = 0;
     }
+
+    public void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            Debug.Log("Button pressed");
+            if (_exitWindow.activeSelf)
+                _exitWindow.SetActive(false);
+            else
+                _exitWindow.SetActive(true);
+        }
+    }
+
 
     public void LoadNextLevel()
     {
         Destroy(_currentSurface);
 
         _currentLevel += 1;
-        _levelText.SetText("Livello " + _currentLevel);
+        _currentScoreText.SetText("Score: " + _currentLevel);
+        if(_currentLevel >= _highScore)
+        {
+            _highScore = _currentLevel;
+            _highScoreText.SetText("High Score: " + _currentLevel);
+        }
 
         _currentSurface = Instantiate(_surfacePrefab, _sceneCenter.position, _sceneCenter.rotation);
         if(_currentLevel < 5)
@@ -44,8 +67,11 @@ public class GameManager : MonoBehaviour
         if(_currentSurface != null)
             Destroy(_currentSurface);
 
-        _currentLevel = 1;
-        _levelText.SetText("Livello " + _currentLevel);
+        _currentLevel = 0;
+        _currentScoreText.SetText("Score: " + _currentLevel);
+
+        if (_currentLevel >= _highScore)
+            _highScoreText.SetText("High Score: " + _currentLevel);
 
         _currentSurface = Instantiate(_surfacePrefab, _sceneCenter.position, _sceneCenter.rotation);
         _currentSurface.GetComponentInChildren<CubeAdjust>().SetEasy();
@@ -61,5 +87,10 @@ public class GameManager : MonoBehaviour
 
         _currentSurface.GetComponent<Transform>().position = _sceneCenter.position;
         yield return null;
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
