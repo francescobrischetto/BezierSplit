@@ -13,6 +13,7 @@ public class MeshGenerator : MonoBehaviour
     Vector3[,] controlPoints;
     public int[] controlTriangles;
     public Vector3[] linearControlPoints;
+    public Mesh controlMesh;
 
     //intera superficie
     public Mesh fullBezierSurface;
@@ -75,8 +76,63 @@ public class MeshGenerator : MonoBehaviour
         }
         //Calcolo i triangoli da visualizzare per disegnare il poligono di controllo
         controlTriangles = calculateTriangles(grade, grade);
-
+        AddControlPointsVisualizer();
     }
+
+    public void AddControlPointsVisualizer()
+    {
+        //indici dei triangoli necessari per visualizzare un cubo
+        int[] triangles = {
+            0, 2, 1, 0, 3, 2,//face front
+            2, 3, 4, 2, 4, 5, //face top
+            1, 2, 5, 1, 5, 6,//face right
+            0, 7, 4, 0, 4, 3,//face left
+            5, 4, 7, 5, 7, 6,//face back
+            0, 6, 7, 0, 1, 6//face bottom
+        };
+
+        //combine serve per unire insieme più mesh
+        CombineInstance[] combine = new CombineInstance[linearControlPoints.Length + 1];
+        //aggiungo l'intera mesh del poligono di controllo
+        Mesh m = new Mesh();
+        m.vertices = linearControlPoints;
+        m.triangles = controlTriangles;
+        combine[0].mesh = m;
+        combine[0].transform = gameObject.transform.localToWorldMatrix;
+        List<Vector3> points = new List<Vector3>();
+
+        float scarto = 0.03f;
+
+        for (int i = 0; i < linearControlPoints.Length; i++)
+        {
+            //la posizione del controlPoint che stiamo considerando
+            float xm =linearControlPoints[i].x;
+            float ym = linearControlPoints[i].y;
+            float zm = linearControlPoints[i].z;
+            //aggiungo gli 8 vertici del cubo
+            points.Add(new Vector3(xm - scarto, ym - scarto, zm - scarto));
+            points.Add(new Vector3(xm + scarto, ym - scarto, zm - scarto));
+            points.Add(new Vector3(xm + scarto, ym + scarto, zm - scarto));
+            points.Add(new Vector3(xm - scarto, ym + scarto, zm - scarto));
+            points.Add(new Vector3(xm - scarto, ym + scarto, zm + scarto));
+            points.Add(new Vector3(xm + scarto, ym + scarto, zm + scarto));
+            points.Add(new Vector3(xm + scarto, ym - scarto, zm + scarto));
+            points.Add(new Vector3(xm - scarto, ym - scarto, zm + scarto));
+            //creo la mesh del cubo
+            Mesh n = new Mesh();
+            n.vertices = (Vector3[])points.ToArray().Clone();
+            n.triangles = (int[])triangles.Clone();
+            //la aggiungo alle mesh che dovranno essere unite
+            combine[i+1].mesh = n;
+            combine[i+1].transform = gameObject.transform.localToWorldMatrix;
+            points.Clear();
+
+        }
+        //unisco le mesh di tutti gli stick
+        controlMesh = new Mesh();
+        controlMesh.CombineMeshes(combine);
+    }
+
 
     Vector3[] calculateVertices(int startX, int startZ, int limX, int limZ)
     {
@@ -226,24 +282,5 @@ public class MeshGenerator : MonoBehaviour
             case 3: return u * u * u;
         }
         return 0;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (controlPoints == null)
-        {
-            return;
-        }
-        //Questo ci permette di disegnare i punti del poligono di controllo qualora fosse necessario
-        for (int col = 0; col < controlPoints.GetLength(0); col++)
-        {
-            for (int row = 0; row < controlPoints.GetLength(1); row++)
-            {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawSphere(controlPoints[col, row], .1f);
-                
-            }
-        }
-        
     }
 }

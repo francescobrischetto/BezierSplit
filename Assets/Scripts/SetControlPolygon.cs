@@ -28,8 +28,7 @@ public class SetControlPolygon : MonoBehaviour
         if (visible) GetComponent<MeshFilter>().mesh = m;
         //aggiorna la mesh
         m.Clear();
-        m.vertices = BezierSurfaceScript.linearControlPoints;
-        m.triangles = BezierSurfaceScript.controlTriangles;
+        m = BezierSurfaceScript.controlMesh;
         m.RecalculateNormals();
     }
 

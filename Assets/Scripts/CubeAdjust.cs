@@ -108,6 +108,7 @@ public class CubeAdjust : MonoBehaviour
         Debug.Log("Calculated Volume: " + volume);
         Debug.Log("Percentage: " + percentage + " %");
         CalculateSticks(midPoints, BezierSurfaceScript.xSize, BezierSurfaceScript.zSize);
+        //BezierSurface.GetComponent<MeshGenerator>().CalculateSticks();
     }
     
     void CalculateSticks(Vector3[] midPoints, int xSize, int zSize) 
