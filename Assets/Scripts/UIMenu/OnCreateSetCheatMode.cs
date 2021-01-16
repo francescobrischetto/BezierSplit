@@ -7,7 +7,12 @@ public class OnCreateSetCheatMode : MonoBehaviour
 {
     public Toggle _toggle;
 
-    void Start()
+    private void Start()
+    {
+        _toggle.isOn = FindObjectOfType<CheatMode>()._cheatMode;
+    }
+
+    void Update()
     {
         FindObjectOfType<CheatMode>()._cheatMode = _toggle.isOn;
     }
