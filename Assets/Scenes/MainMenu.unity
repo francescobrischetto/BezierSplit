@@ -2778,6 +2778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1581466839}
   - component: {fileID: 1581466840}
+  - component: {fileID: 1581466841}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -2865,6 +2866,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1581466841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581466838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a4663942b027b4399a3e27885a351c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toggle: {fileID: 1581466840}
 --- !u!1 &1584921491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3703,7 +3717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955ea5526ec22d142a081956969c05e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cheatMode: 0
+  _cheatMode: 1
 --- !u!4 &1690415319
 Transform:
   m_ObjectHideFlags: 0
