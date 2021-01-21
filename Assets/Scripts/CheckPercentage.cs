@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class CheckPercentage : MonoBehaviour
 {
+    public bool correct;
+
     [SerializeField] private Slider _slider;
     [SerializeField] private GameManager _manager;
     [SerializeField] private GameObject _winPanel;
-    [SerializeField] private GameObject _losePanel;
+    [SerializeField] private GameObject _restartPanel;
+    [SerializeField] private GameObject _retryPanel;
 
     [SerializeField] private TextMeshProUGUI _winPerc;
     [SerializeField] private TextMeshProUGUI _losePerc;
@@ -21,18 +24,35 @@ public class CheckPercentage : MonoBehaviour
         if ((_slider.value >= cubeAdj.percentage - (int)cubeAdj.margin && _slider.value <= cubeAdj.percentage + (int)cubeAdj.margin) ||
             (100 - _slider.value >= cubeAdj.percentage - (int)cubeAdj.margin && 100 - _slider.value <= cubeAdj.percentage + (int)cubeAdj.margin))
         {
-            _winPanel.SetActive(true);
+            correct = true;
+            EnableWinMessage();
         }
         else
         {
-            _losePanel.SetActive(true);
+            correct = false;
+            if (FindObjectOfType<GameManager>()._lives > 0)
+                EnableRetryMessage();
+            else
+                EnableRestartMessage();
         }
     }
 
-    public void OnClickPercentageSetText()
+    public void EnableWinMessage()
     {
+        _winPanel.SetActive(true);
         int perc = FindObjectOfType<CubeAdjust>().percentage;
         _winPerc.SetText("La percentuale era: " + perc + "%");
+    }
+
+    public void EnableRetryMessage()
+    {
+        _retryPanel.SetActive(true);
+    }
+
+    public void EnableRestartMessage()
+    {
+        _restartPanel.SetActive(true);
+        int perc = FindObjectOfType<CubeAdjust>().percentage;
         _losePerc.SetText("La percentuale era: " + perc + "%");
     }
 }

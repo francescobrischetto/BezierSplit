@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public int _lives;
+
     private int _currentLevel;
     private int _highScore;
     private GameObject _currentSurface;
 
     [SerializeField] private TextMeshProUGUI _currentScoreText;
     [SerializeField] private TextMeshProUGUI _highScoreText;
+    [SerializeField] private TextMeshProUGUI _livesText;
     [SerializeField] private Transform _sceneCenter;
     [SerializeField] private GameObject _surfacePrefab;
     [SerializeField] private GameObject _exitWindow;
@@ -20,10 +23,14 @@ public class GameManager : MonoBehaviour
     {
         RestartGame();
         _highScore = 0;
+        _lives = 3;
+        _livesText.SetText("Vite: " + _lives);
     }
 
     public void Update()
     {
+        _livesText.SetText("Vite: " + _lives);
+
         if (Input.GetButtonDown("Cancel"))
         {
             Debug.Log("Button pressed");
@@ -68,6 +75,7 @@ public class GameManager : MonoBehaviour
             Destroy(_currentSurface);
 
         _currentLevel = 0;
+        _lives = 3;
         _currentScoreText.SetText("Score: " + _currentLevel);
 
         if (_currentLevel >= _highScore)
@@ -79,6 +87,17 @@ public class GameManager : MonoBehaviour
 
         _currentSurface.GetComponent<Turnable>().AdjustPosition();
         StartCoroutine(DelayTimer());
+    }
+
+    public void NextAttempt()
+    {
+        bool check = FindObjectOfType<CheckPercentage>().correct;
+        if (check)
+            LoadNextLevel();
+        else if (!check && _lives > 0)
+            _lives--;
+        else
+            RestartGame();
     }
 
     IEnumerator DelayTimer()
