@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>BezierSplit</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="shortcut icon" href="img/icona.ico" />
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">Bezier<span class="logo_colour">Split</span></a></h1>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li><a href="index.html">Home</a></li>
+          <li class="selected"><a href="examples.html">Teoria</a></li>
+          <li><a href="page.html">Manuale Utente</a></li>
+          <li><a href="another_page.html">Gioco</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+        <!-- insert the page content here -->
+		<h1>Manuale Teorico</h1>
+		<br>
+		<h2><strong>Cos'è una superficie di Bézier?</strong></h2>
+		<p>Una superficie di Bézier è una particolare <strong>spline matematica</strong> usata nella computer grafica e nel CAD per rappresentare superfici curve in maniera matematicamente conveniente. 
+		In analisi matematica, una spline è una funzione, costituita mediante un insieme di polinomi opportunamente composti, il cui scopo è quello di interpolare un intervallo di punti 
+		in modo che la funzione sia continua almeno fino ad un dato ordine di derivate in ogni punto dell'intervallo di definizione.<br><br>
+		La generica superficie di Bézier di bigrado \( (h,k) \) può essere definita come una superficie parametrica dove la posizione del generico punto \( \vec{P} \), funzione di coordinate parametriche
+		\( u,v \) è viene definita come segue:
+		$$ \vec{P}(u,v) = \sum_{i=0}^{h} \sum_{j=0}^{k}{B^{h}_i} (u) {B^{k}_j} (v) \vec{P_{i,j}}  $$
+		
+		<h2><strong>Cosa descrive una superficie di Bézier?</strong></h2>
+		<p>Una superficie di Bézier è una funzione di due variabili \( (h,k) \) definita sul quadrato unitario del piano \( uv \) e avente valori in \( \mathbb{E}^3 \), lo spazio affine. Ciò significa:
+		$$ \vec{P}(u,v): [0,1] \times [0,1] \to \mathbb{E}^3 $$
+		<br>
+		Essa è descritta da un insieme di punti di controllo &nbsp &nbsp \( \{\vec{P_{i,j}}\}^{i = 0,...,h}_{j = 0,...,k} \)  &nbsp &nbsp con \( h \geq 1 , k \geq 1 \) che rappresentano il <strong>poliedro di controllo</strong>. 
+		L'idea che sta alla base della teoria di Bézier è di definire l'intera superficie a partire da questo insieme finito di punti, in modo che il suo supporto ne segua l'andamento. <br> <br>
+		
+		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+		<img src="img/poliedro.png" alt="Poliedro di Controllo" width="300" height="295"> <br>
+		
+		La coppia  \( (h,k) \) è detta <strong>bigrado</strong> della superficie di Bézier e ne determina la quantità \( (h+1) \cdot (k+1) \) di punti del poliedro. <br>
+		Gli ultimi elementi che descrivono la superficie di Bézier nella sua forma generica vista precedentemente sono i <strong>polinomi di Bernstein</strong>  \( {B^{n}_i} (u) \). Questi rappresentano i 
+		<i>pesi</i>, come coefficienti polinomiali, da dare ai punti di controllo in ogni punto del piano \( uv \) per descrivere la superficie di Bézier nello spazio \( \mathbb{E}^3 \). <br>
+		Tali polinomi possono essere scritti come:
+		
+		$$ {B^{n}_i} (u) = \binom n i u^i (1-u)^{n-i}\mspace25pt\text{con:}\mspace25pt \binom n i = \frac{n!}{i!(n-i)!}$$
+		
+		<h5><strong>Oss.</strong> Le superfici di Bézier furono descritte per la prima volta nel 1962 dall'ingegnere francese <a href="https://it.wikipedia.org/wiki/Pierre_Bézier"><strong>Pierre Bézier</strong></a>, che le utilizzò per progettare carrozzerie di 
+		automobile. Le superfici di Bézier possono essere di qualunque bigrado, ma quelle bicubiche \( (h=k=3) \) generalmente forniscono abbastanza <b>gradi di libertà</b> per la maggior parte delle applicazioni.</h5>
+		<h5><strong>Oss.</strong> Nonostante le superfici di Bézier siano state introdotte partendo da fogli semplici di superficie e mostrando la corrispondenza tra <i>quadratiche a sella</i> e superficie di Bézier
+		di bigrado \( (1,1) \) non tutte le superfici di Bézier rappresentano fogli semplici di superficie.</h5>
+		</p>
+		
+		<h2><strong>Esiste un procedimento per valutare una superficie di Bézier?</strong></h2>
+		<p>Un algoritmo operativo presentato a lezione per ottenere tutti i punti di una superficie di Bézier consiste nell'<a href="https://it.wikipedia.org/wiki/Algoritmo_di_de_Casteljau"><strong>Algoritmo di de Casteljau</strong></a>.
+		Esso rappresenta un metodo ricorsivo per valutare i polinomi di Bernstein visti pocanzi ed è una diretta estensione del medesimo algoritmo presentato a lezione per le curve di Bézier. <br><br>
+		
+		TODO: Finire il Paragrafo
+		<br><br>
+		</p>
+		
+		<h2><strong>Quali sono i vantaggi e gli svantaggi nell'utilizzo del formalismo delle superfici di Bézier al computer?</strong></h2>
+		<br><br>
+		<p>TODO: Finire il Paragrafo</p>
+		<br><br>
+		<h2><strong>Scelte progettuali adottate nella realizzazione di BezierSplit</strong></h2>
+		<br><br>
+		<p>TODO: Finire il Paragrafo</p>
+		<br><br>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      <p><a href="index.html">Home</a> | <a href="examples.html">Teoria</a> | <a href="page.html">Manuale Utente</a> | <a href="another_page.html">Gioco</a></p>
+	  <p><img src="img/logo1.png" alt="Logo" width="600" height="125"></div>
+  </div>
+</body>
+</html>

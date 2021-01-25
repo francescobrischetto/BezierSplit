@@ -8,7 +8,7 @@ html
 body
 { font: normal .80em 'trebuchet ms', arial, sans-serif;
   background: #FFF;
-  color: #555;}
+}
 
 p
 { 
@@ -22,7 +22,7 @@ img
   }
 
 h1, h2, h3, h4, h5, h6 
-{ color: #362C20;
+{ color: #000;
   letter-spacing: 0em;
   padding: 0 0 5px 0;}
 
@@ -48,8 +48,8 @@ h4, h6
   text-transform: uppercase;}
 
 h5, h6
-{ color: #888;
-  font: normal 95% arial;
+{ color: #362C20;
+  font: normal 120% arial;
   letter-spacing: normal;
   padding: 0 0 15px 0;}
 
