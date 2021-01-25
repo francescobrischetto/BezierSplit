@@ -3,6 +3,7 @@
 
 <head>
   <title>BezierSplit</title>
+  <meta charset="utf-8" />
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
@@ -34,46 +35,46 @@
         <!-- insert the page content here -->
 		<h1>Manuale Teorico</h1>
 		<br>
-		<h2><strong>Cos'Ë una superficie di BÈzier?</strong></h2>
-		<p>Una superficie di BÈzier Ë una particolare <strong>spline matematica</strong> usata nella computer grafica e nel CAD per rappresentare superfici curve in maniera matematicamente conveniente. 
-		In analisi matematica, una spline Ë una funzione, costituita mediante un insieme di polinomi opportunamente composti, il cui scopo Ë quello di interpolare un intervallo di punti 
+		<h2><strong>Cos'√® una superficie di B√©zier?</strong></h2>
+		<p>Una superficie di B√©zier √® una particolare <strong>spline matematica</strong> usata nella computer grafica e nel CAD per rappresentare superfici curve in maniera matematicamente conveniente. 
+		In analisi matematica, una spline √® una funzione, costituita mediante un insieme di polinomi opportunamente composti, il cui scopo √® quello di interpolare un intervallo di punti 
 		in modo che la funzione sia continua almeno fino ad un dato ordine di derivate in ogni punto dell'intervallo di definizione.<br><br>
-		La generica superficie di BÈzier di bigrado \( (h,k) \) puÚ essere definita come una superficie parametrica dove la posizione del generico punto \( \vec{P} \), funzione di coordinate parametriche
-		\( u,v \) Ë viene definita come segue:
+		La generica superficie di B√©zier di bigrado \( (h,k) \) pu√≤ essere definita come una superficie parametrica dove la posizione del generico punto \( \vec{P} \), funzione di coordinate parametriche
+		\( u,v \) √® viene definita come segue:
 		$$ \vec{P}(u,v) = \sum_{i=0}^{h} \sum_{j=0}^{k}{B^{h}_i} (u) {B^{k}_j} (v) \vec{P_{i,j}}  $$
 		
-		<h2><strong>Cosa descrive una superficie di BÈzier?</strong></h2>
-		<p>Una superficie di BÈzier Ë una funzione di due variabili \( (h,k) \) definita sul quadrato unitario del piano \( uv \) e avente valori in \( \mathbb{E}^3 \), lo spazio affine. CiÚ significa:
+		<h2><strong>Cosa descrive una superficie di B√©zier?</strong></h2>
+		<p>Una superficie di B√©zier √® una funzione di due variabili \( (h,k) \) definita sul quadrato unitario del piano \( uv \) e avente valori in \( \mathbb{E}^3 \), lo spazio affine. Ci√≤ significa:
 		$$ \vec{P}(u,v): [0,1] \times [0,1] \to \mathbb{E}^3 $$
 		<br>
-		Essa Ë descritta da un insieme di punti di controllo &nbsp &nbsp \( \{\vec{P_{i,j}}\}^{i = 0,...,h}_{j = 0,...,k} \)  &nbsp &nbsp con \( h \geq 1 , k \geq 1 \) che rappresentano il <strong>poliedro di controllo</strong>. 
-		L'idea che sta alla base della teoria di BÈzier Ë di definire l'intera superficie a partire da questo insieme finito di punti, in modo che il suo supporto ne segua l'andamento. <br> <br>
+		Essa √® descritta da un insieme di punti di controllo &nbsp &nbsp \( \{\vec{P_{i,j}}\}^{i = 0,...,h}_{j = 0,...,k} \)  &nbsp &nbsp con \( h \geq 1 , k \geq 1 \) che rappresentano il <strong>poliedro di controllo</strong>. 
+		L'idea che sta alla base della teoria di B√©zier √® di definire l'intera superficie a partire da questo insieme finito di punti, in modo che il suo supporto ne segua l'andamento. <br> <br>
 		
 		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 		<img src="img/poliedro.png" alt="Poliedro di Controllo" width="300" height="295"> <br>
 		
-		La coppia  \( (h,k) \) Ë detta <strong>bigrado</strong> della superficie di BÈzier e ne determina la quantit‡ \( (h+1) \cdot (k+1) \) di punti del poliedro. <br>
-		Gli ultimi elementi che descrivono la superficie di BÈzier nella sua forma generica vista precedentemente sono i <strong>polinomi di Bernstein</strong>  \( {B^{n}_i} (u) \). Questi rappresentano i 
-		<i>pesi</i>, come coefficienti polinomiali, da dare ai punti di controllo in ogni punto del piano \( uv \) per descrivere la superficie di BÈzier nello spazio \( \mathbb{E}^3 \). <br>
+		La coppia  \( (h,k) \) √® detta <strong>bigrado</strong> della superficie di B√©zier e ne determina la quantit√† \( (h+1) \cdot (k+1) \) di punti del poliedro. <br>
+		Gli ultimi elementi che descrivono la superficie di B√©zier nella sua forma generica vista precedentemente sono i <strong>polinomi di Bernstein</strong>  \( {B^{n}_i} (u) \). Questi rappresentano i 
+		<i>pesi</i>, come coefficienti polinomiali, da dare ai punti di controllo in ogni punto del piano \( uv \) per descrivere la superficie di B√©zier nello spazio \( \mathbb{E}^3 \). <br>
 		Tali polinomi possono essere scritti come:
 		
 		$$ {B^{n}_i} (u) = \binom n i u^i (1-u)^{n-i}\mspace25pt\text{con:}\mspace25pt \binom n i = \frac{n!}{i!(n-i)!}$$
 		
-		<h5><strong>Oss.</strong> Le superfici di BÈzier furono descritte per la prima volta nel 1962 dall'ingegnere francese <a href="https://it.wikipedia.org/wiki/Pierre_BÈzier"><strong>Pierre BÈzier</strong></a>, che le utilizzÚ per progettare carrozzerie di 
-		automobile. Le superfici di BÈzier possono essere di qualunque bigrado, ma quelle bicubiche \( (h=k=3) \) generalmente forniscono abbastanza <b>gradi di libert‡</b> per la maggior parte delle applicazioni.</h5>
-		<h5><strong>Oss.</strong> Nonostante le superfici di BÈzier siano state introdotte partendo da fogli semplici di superficie e mostrando la corrispondenza tra <i>quadratiche a sella</i> e superficie di BÈzier
-		di bigrado \( (1,1) \) non tutte le superfici di BÈzier rappresentano fogli semplici di superficie.</h5>
+		<h5><strong>Oss.</strong> Le superfici di B√©zier furono descritte per la prima volta nel 1962 dall'ingegnere francese <a href="https://it.wikipedia.org/wiki/Pierre_B√©zier"><strong>Pierre B√©zier</strong></a>, che le utilizz√≤ per progettare carrozzerie di 
+		automobile. Le superfici di B√©zier possono essere di qualunque bigrado, ma quelle bicubiche \( (h=k=3) \) generalmente forniscono abbastanza <b>gradi di libert√†</b> per la maggior parte delle applicazioni.</h5>
+		<h5><strong>Oss.</strong> Nonostante le superfici di B√©zier siano state introdotte partendo da fogli semplici di superficie e mostrando la corrispondenza tra <i>quadratiche a sella</i> e superficie di B√©zier
+		di bigrado \( (1,1) \) non tutte le superfici di B√©zier rappresentano fogli semplici di superficie.</h5>
 		</p>
 		
-		<h2><strong>Esiste un procedimento per valutare una superficie di BÈzier?</strong></h2>
-		<p>Un algoritmo operativo presentato a lezione per ottenere tutti i punti di una superficie di BÈzier consiste nell'<a href="https://it.wikipedia.org/wiki/Algoritmo_di_de_Casteljau"><strong>Algoritmo di de Casteljau</strong></a>.
-		Esso rappresenta un metodo ricorsivo per valutare i polinomi di Bernstein visti pocanzi ed Ë una diretta estensione del medesimo algoritmo presentato a lezione per le curve di BÈzier. <br><br>
+		<h2><strong>Esiste un procedimento per valutare una superficie di B√©zier?</strong></h2>
+		<p>Un algoritmo operativo presentato a lezione per ottenere tutti i punti di una superficie di B√©zier consiste nell'<a href="https://it.wikipedia.org/wiki/Algoritmo_di_de_Casteljau"><strong>Algoritmo di de Casteljau</strong></a>.
+		Esso rappresenta un metodo ricorsivo per valutare i polinomi di Bernstein visti pocanzi ed √® una diretta estensione del medesimo algoritmo presentato a lezione per le curve di B√©zier. <br><br>
 		
 		TODO: Finire il Paragrafo
 		<br><br>
 		</p>
 		
-		<h2><strong>Quali sono i vantaggi e gli svantaggi nell'utilizzo del formalismo delle superfici di BÈzier al computer?</strong></h2>
+		<h2><strong>Quali sono i vantaggi e gli svantaggi nell'utilizzo del formalismo delle superfici di B√©zier al computer?</strong></h2>
 		<br><br>
 		<p>TODO: Finire il Paragrafo</p>
 		<br><br>

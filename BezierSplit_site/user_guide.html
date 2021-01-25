@@ -32,12 +32,13 @@
     </div>
     <div id="site_content">
         <!-- insert the page content here -->
-		<h1>Scopo del Gioco</h1>
+		<h1>Manuale Utente</h1>
+		<h2><b>Scopo del Gioco</b></h2>
     <p>In <strong>BézierSplit</strong>, il giocatore si troverà di fronte ad un parallelepipedo suddiviso in due da una superficie di Bézier, e dovrà cercare di 
       indovinare il punto in cui tale suddivisione avviene descrivendo quanta percentuale del volume complessivo del parallelepipedo sia presente nella 
       parte sopra e quale nella parte sotto (una ovviamente implica direttamente l'altra).<br><br>
     </p>
-    <h1>Come si Gioca</h1>
+    <h2><b>Come si Gioca</b></h2>
     <p>Un solido suddiviso in due parti, dà luogo a due volumi distinti, ecco quindi che per procedere all'inserimento della risposta il giocatore avrà 
       a disposizione uno <strong>slider</strong> (un componente grafico verticale con il quale si può impostare un valore muovendo un indicatore) che 
       permetterà di localizzare con precisione la ripartizione del volume nelle due parti corrispondenti tramite <strong>click sinistro del mouse e 
@@ -54,7 +55,7 @@
       </ul>
       <br>
     </p>
-    <h1>Punteggio e Difficoltà</h1>
+    <h2><b>Punteggio e Difficoltà</b></h2>
     <p>Durante una partita, viene considerata corretta una suddivisione di volume con un certo grado di approssimazione (inizialmente 5%), ciò significa
       che a fronte di una superficie suddivisa 40%-60% vengono accettate anche suddivisioni del tipo 45%-55% e 35%-65%. Per ogni risposta corretta il 
       giocatore guadagnerà un punto e passerà al livello successivo, dove verrà generata (proceduralmente) una nuova superficie contenuta in un nuovo parallelepipedo. Ogni 5 risposte corrette (corrispondenti a 5 punti) la difficoltà del gioco aumenterà,
@@ -63,8 +64,8 @@
       Se viene inserita una suddivisione errata, il giocatore perderà una vita (3 disponibili durante l'intera sessione) e potrà riprovare ad
       indovinare la suddivisione del solido corrente, tuttavia, una volta esaurite le vite disponibili, l'errore portera al "Game Over", con conseguente
       azzeramento del punteggio corrente e della difficoltà. Verrà comunque memorizzato il valore di punteggio della sessione di gioco migliore.<br><br>
-    </p>
-    <h1>L'Interfaccia di Gioco</h1>
+    
+    <h2><b>L'Interfaccia di Gioco</b></h2>
 		<p> Segue una descrizione dettagliata dell'interfaccia di gioco: <br><br>
       <img src="img/bs_interface.PNG" alt="Demo" width="780" height="420"><br>
       <ol>
@@ -83,6 +84,7 @@
         <li>Pulsante "Approssimazione volume": Per visualizzare o meno con maggiore chiarezza uno dei due volumi</li>
       </ol>  
 		<br><br>
+	</p>
     </div>
     <div id="content_footer"></div>
     <div id="footer">
