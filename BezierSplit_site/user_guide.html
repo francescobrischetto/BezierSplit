@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>BézierSplit</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" />
+  <link rel="shortcut icon" href="img/icona.ico" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">Bézier<span class="logo_colour">Split</span></a></h1>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li><a href="index.html">Home</a></li>
+          <li><a href="examples.html">Teoria</a></li>
+          <li class="selected"><a href="user_guide.html">Manuale Utente</a></li>
+          <li><a href="another_page.html">Gioco</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+        <!-- insert the page content here -->
+		<h1>Scopo del Gioco</h1>
+    <p>In <strong>BézierSplit</strong>, il giocatore si troverà di fronte ad un parallelepipedo suddiviso in due da una superficie di Bézier, e dovrà cercare di 
+      indovinare il punto in cui tale suddivisione avviene descrivendo quanta percentuale del volume complessivo del parallelepipedo sia presente nella 
+      parte sopra e quale nella parte sotto (una ovviamente implica direttamente l'altra).<br><br>
+    </p>
+    <h1>Come si Gioca</h1>
+    <p>Un solido suddiviso in due parti, dà luogo a due volumi distinti, ecco quindi che per procedere all'inserimento della risposta il giocatore avrà 
+      a disposizione uno <strong>slider</strong> (un componente grafico verticale con il quale si può impostare un valore muovendo un indicatore) che 
+      permetterà di localizzare con precisione la ripartizione del volume nelle due parti corrispondenti tramite <strong>click sinistro del mouse e 
+      trascinamento</strong>.
+      <br><br>
+      <strong>Nota:</strong> Le soluzioni opposte sono considerate equivalenti (es. 40%-60% è cosiderata uguale a 60%-40%)<br><br>
+      Per poter analizzare meglio il solido prima di fornire una risposta, il giocatore può ruotare a piacimento la figura tramite <strong>click sinistro 
+      del mouse e trascinamento</strong> in un punto qualsiasi della schermata di gioco, inoltre, cliccando sul pulsante "Strumenti Aggiuntivi", si
+      aprirà una finestra con delle opzioni di analisi aggiuntive che possono essere attivate o disattivate a piacimento. Tali opzioni sono:<br>
+      <ul>
+        <li><strong>Poligono di controllo</strong>: Per visualizzare graficamente il poligono di controllo della superficie di Bézier generata;</li>
+        <li><strong>Superficie intera</strong>: Per visualizzare una versione estesa della superficie presente nel solido;</li>
+        <li><strong>Approssimazione volume</strong>: Per colorare una delle due parti in cui il solido è stato suddiviso, evidenziandone il volume.</li>
+      </ul>
+      <br>
+    </p>
+    <h1>Punteggio e Difficoltà</h1>
+    <p>Durante una partita, viene considerata corretta una suddivisione di volume con un certo grado di approssimazione (inizialmente 5%), ciò significa
+      che a fronte di una superficie suddivisa 40%-60% vengono accettate anche suddivisioni del tipo 45%-55% e 35%-65%. Per ogni risposta corretta il 
+      giocatore guadagnerà un punto e passerà al livello successivo, dove verrà generata (proceduralmente) una nuova superficie contenuta in un nuovo parallelepipedo. Ogni 5 risposte corrette (corrispondenti a 5 punti) la difficoltà del gioco aumenterà,
+      proponendo al giocatore superfici sempre più complesse in solidi più allungati e con un'approssimazione tollerata sempre minore (la difficoltà 
+      massima viene raggiunta dal livello 15 in poi)<br><br>
+      Se viene inserita una suddivisione errata, il giocatore perderà una vita (3 disponibili durante l'intera sessione) e potrà riprovare ad
+      indovinare la suddivisione del solido corrente, tuttavia, una volta esaurite le vite disponibili, l'errore portera al "Game Over", con conseguente
+      azzeramento del punteggio corrente e della difficoltà. Verrà comunque memorizzato il valore di punteggio della sessione di gioco migliore.<br><br>
+    </p>
+    <h1>L'Interfaccia di Gioco</h1>
+		<p> Segue una descrizione dettagliata dell'interfaccia di gioco: <br><br>
+      <img src="img/bs_interface.PNG" alt="Demo" width="780" height="420"><br>
+      <ol>
+        <li>Slider di inserimento: Le due percentuali sopra e sotto indicano la suddivisione attuale fornita dal giocatore, per aggiustare tali valori
+          è sufficiente muovere verso l'alto o verso il basso la sfera centrale;
+        </li>
+        <li>Pulsante "Strumenti aggiuntivi": Permette di attivare (o disattivare, se nuovamente premuto) la finestra contenente le opzioni avanzate di
+          visualizzazione (vedi punti 7-8-9);
+        </li>
+        <li>Pulsante "Conferma": Per confermare la suddivisione fornita con lo slider e passare (eventualmente) al livello successivo</li>
+        <li>Testo "Score": Il punteggio della partita corrente</li>
+        <li>Testo "High Score": Il punteggio massimo raggiunto nella sessione di gioco corrente</li>
+        <li>Testo "Vite": Visualizza il numero di "vite" rimanenti, gli errori che separano dal "Game Over"</li>
+        <li>Pulsante "Poligono di controllo": Per visualizzare o meno il poligono di controllo della superficie</li>
+        <li>Pulsante "Superficie intera": Per visualizzare o meno un'estensione della superficie</li>
+        <li>Pulsante "Approssimazione volume": Per visualizzare o meno con maggiore chiarezza uno dei due volumi</li>
+      </ol>  
+		<br><br>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      <p><a href="index.html">Home</a> | <a href="examples.html">Teoria</a> | <a href="user_guide.html">Manuale Utente</a> | <a href="another_page.html">Gioco</a></p>
+	  <p><img src="img/logo1.png" alt="Logo" width="600" height="125"></div>
+  </div>
+</body>
+</html>
