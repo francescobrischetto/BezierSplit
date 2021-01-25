@@ -31,13 +31,15 @@
       </div>
     </div>
     <div id="site_content">
-        <!-- insert the page content here -->
-		<h1>Manuale Utente</h1>
+
+    <h1>Manuale Utente</h1>
+    <br>
 		<h2><b>Scopo del Gioco</b></h2>
     <p>In <strong>BézierSplit</strong>, il giocatore si troverà di fronte ad un parallelepipedo suddiviso in due da una superficie di Bézier, e dovrà cercare di 
       indovinare il punto in cui tale suddivisione avviene descrivendo quanta percentuale del volume complessivo del parallelepipedo sia presente nella 
       parte sopra e quale nella parte sotto (una ovviamente implica direttamente l'altra).<br><br>
     </p>
+
     <h2><b>Come si Gioca</b></h2>
     <p>Un solido suddiviso in due parti, dà luogo a due volumi distinti, ecco quindi che per procedere all'inserimento della risposta il giocatore avrà 
       a disposizione uno <strong>slider</strong> (un componente grafico verticale con il quale si può impostare un valore muovendo un indicatore) che 
@@ -48,40 +50,52 @@
       Per poter analizzare meglio il solido prima di fornire una risposta, il giocatore può ruotare a piacimento la figura tramite <strong>click sinistro 
       del mouse e trascinamento</strong> in un punto qualsiasi della schermata di gioco, inoltre, cliccando sul pulsante "Strumenti Aggiuntivi", si
       aprirà una finestra con delle opzioni di analisi aggiuntive che possono essere attivate o disattivate a piacimento. Tali opzioni sono:<br>
-      <ul>
-        <li><strong>Poligono di controllo</strong>: Per visualizzare graficamente il poligono di controllo della superficie di Bézier generata;</li>
-        <li><strong>Superficie intera</strong>: Per visualizzare una versione estesa della superficie presente nel solido;</li>
-        <li><strong>Approssimazione volume</strong>: Per colorare una delle due parti in cui il solido è stato suddiviso, evidenziandone il volume.</li>
-      </ul>
-      <br>
-    </p>
+    </p>  
+    <ul>
+      <li><strong>Poligono di controllo</strong>: Per visualizzare graficamente il poligono di controllo della superficie di Bézier generata;</li>
+      <li><strong>Superficie intera</strong>: Per visualizzare una versione estesa della superficie presente nel solido;</li>
+      <li><strong>Approssimazione volume</strong>: Per colorare una delle due parti in cui il solido è stato suddiviso, evidenziandone il volume.</li>
+    </ul>
+    <p>Durante il gioco è possibile premere il tasto <b>esc</b> della tastiera per visualizzare un menù da cui il giocatore può tornare alla schermata
+      principale del gioco (Attenzione: tornare al menù principale del gioco comporta la perdita dei progressi correnti).</p>
+    <br>
+
     <h2><b>Punteggio e Difficoltà</b></h2>
     <p>Durante una partita, viene considerata corretta una suddivisione di volume con un certo grado di approssimazione (inizialmente 5%), ciò significa
       che a fronte di una superficie suddivisa 40%-60% vengono accettate anche suddivisioni del tipo 45%-55% e 35%-65%. Per ogni risposta corretta il 
-      giocatore guadagnerà un punto e passerà al livello successivo, dove verrà generata (proceduralmente) una nuova superficie contenuta in un nuovo parallelepipedo. Ogni 5 risposte corrette (corrispondenti a 5 punti) la difficoltà del gioco aumenterà,
-      proponendo al giocatore superfici sempre più complesse in solidi più allungati e con un'approssimazione tollerata sempre minore (la difficoltà 
-      massima viene raggiunta dal livello 15 in poi)<br><br>
-      Se viene inserita una suddivisione errata, il giocatore perderà una vita (3 disponibili durante l'intera sessione) e potrà riprovare ad
+      giocatore guadagnerà un punto e passerà al livello successivo, dove verrà generata (proceduralmente) una nuova superficie contenuta in un nuovo 
+      parallelepipedo. Ogni 5 risposte corrette (corrispondenti a 5 punti) la difficoltà del gioco aumenterà, proponendo al giocatore superfici sempre 
+      più complesse in solidi più allungati e con un'approssimazione tollerata sempre minore (la difficoltà massima viene raggiunta dal livello 15 in 
+      poi).<br>
+      Più nello specifico, le difficoltà del gioco si suddividono in:
+    </p>
+    <ul>
+      <li><strong>Facile (livelli 0-4)</strong>: I primi livelli del gioco, con superfici di bassa complessità e un tasso di tolleranza sugli errori del 5%;</li>
+      <li><strong>Medio (livelli 5-9)</strong>: La difficoltà standard del gioco, con superfici di media complessità e un tasso di tolleranza sugli errori del 3%;</li>
+      <li><strong>Difficile (livelli 10-14)</strong>: Una difficoltà avanzata del gioco, con superfici di discreta complessità e un tasso di tolleranza sugli errori del 2%;</li>
+      <li><strong>Impossibile (livelli 15+)</strong>: La massima difficoltà del gioco, con superfici di alta complessità e un tasso di tolleranza sugli errori del 1%.</li>
+    </ul>
+    <p>Se viene inserita una suddivisione errata, il giocatore perderà una vita (3 disponibili durante l'intera sessione) e potrà riprovare ad
       indovinare la suddivisione del solido corrente, tuttavia, una volta esaurite le vite disponibili, l'errore portera al "Game Over", con conseguente
-      azzeramento del punteggio corrente e della difficoltà. Verrà comunque memorizzato il valore di punteggio della sessione di gioco migliore.<br><br>
-    
+      azzeramento del punteggio corrente e della difficoltà. <br></br>
+      <b>Nota:</b> Verrà comunque memorizzato il valore di punteggio della sessione di gioco migliore.<br><br>
+    </p>
+
     <h2><b>L'Interfaccia di Gioco</b></h2>
 		<p> Segue una descrizione dettagliata dell'interfaccia di gioco: <br><br>
       <img src="img/bs_interface.PNG" alt="Demo" width="780" height="420"><br>
       <ol>
-        <li>Slider di inserimento: Le due percentuali sopra e sotto indicano la suddivisione attuale fornita dal giocatore, per aggiustare tali valori
-          è sufficiente muovere verso l'alto o verso il basso la sfera centrale;
-        </li>
-        <li>Pulsante "Strumenti aggiuntivi": Permette di attivare (o disattivare, se nuovamente premuto) la finestra contenente le opzioni avanzate di
-          visualizzazione (vedi punti 7-8-9);
-        </li>
-        <li>Pulsante "Conferma": Per confermare la suddivisione fornita con lo slider e passare (eventualmente) al livello successivo</li>
-        <li>Testo "Score": Il punteggio della partita corrente</li>
-        <li>Testo "High Score": Il punteggio massimo raggiunto nella sessione di gioco corrente</li>
-        <li>Testo "Vite": Visualizza il numero di "vite" rimanenti, gli errori che separano dal "Game Over"</li>
-        <li>Pulsante "Poligono di controllo": Per visualizzare o meno il poligono di controllo della superficie</li>
-        <li>Pulsante "Superficie intera": Per visualizzare o meno un'estensione della superficie</li>
-        <li>Pulsante "Approssimazione volume": Per visualizzare o meno con maggiore chiarezza uno dei due volumi</li>
+        <li><b>Slider di inserimento</b>: Le due percentuali sopra e sotto indicano la suddivisione attuale fornita dal giocatore, per aggiustare tali valori
+          è sufficiente muovere verso l'alto o verso il basso la sfera centrale;</li>
+        <li><b>Pulsante "Strumenti aggiuntivi"</b>: Permette di attivare (o disattivare, se nuovamente premuto) la finestra contenente le opzioni avanzate di
+          visualizzazione (vedi punti 7-8-9);</li>
+        <li><b>Pulsante "Conferma"</b>: Per confermare la suddivisione fornita con lo slider e passare (eventualmente) al livello successivo</li>
+        <li><b>Testo "Score"</b>: Il punteggio della partita corrente</li>
+        <li><b>Testo "High Score"</b>: Il punteggio massimo raggiunto nella sessione di gioco corrente</li>
+        <li><b>Testo "Vite"</b>: Visualizza il numero di "vite" rimanenti, gli errori che separano dal "Game Over"</li>
+        <li><b>Pulsante "Poligono di controllo"</b>: Per visualizzare o meno il poligono di controllo della superficie</li>
+        <li><b>Pulsante "Superficie intera"</b>: Per visualizzare o meno un'estensione della superficie</li>
+        <li><b>Pulsante "Approssimazione volume"</b>: Per visualizzare o meno con maggiore chiarezza uno dei due volumi</li>
       </ol>  
 		<br><br>
 	</p>
