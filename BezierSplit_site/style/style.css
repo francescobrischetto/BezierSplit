@@ -35,14 +35,14 @@ h1, h2, h3
 h2
 { font-size: 180%;
   padding: 9px 0 5px 0;
-  color: #B48A7C;}
+  color: #904E36;}
 
 h3
 { font-size: 170%;
   padding: 5px 0 0 0;}
 
 h4, h6
-{ color: #B48A7C;
+{ color: #904E36;
   padding: 0 0 5px 0;
   font: normal 110% arial;
   text-transform: uppercase;}
@@ -56,7 +56,7 @@ h5, h6
 a, a:hover
 { outline: none;
   text-decoration: underline;
-  color: #B48A7C;}
+  color: #904E36;}
 
 a:hover
 { text-decoration: none;}

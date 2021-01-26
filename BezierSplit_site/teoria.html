@@ -36,45 +36,45 @@
 		<h1>Manuale Teorico</h1>
 		<br>
 		<h2><strong>Cos'è una superficie di Bézier?</strong></h2>
-		<p>Una superficie di Bézier è una particolare <strong>spline matematica</strong> usata nella computer grafica e nel CAD per rappresentare superfici curve in maniera matematicamente conveniente. 
-		In analisi matematica, una spline è una funzione, costituita mediante un insieme di polinomi opportunamente composti, il cui scopo è quello di interpolare un intervallo di punti 
-		in modo che la funzione sia continua almeno fino ad un dato ordine di derivate in ogni punto dell'intervallo di definizione.<br><br>
-		La generica superficie di Bézier di bigrado \( (h,k) \) può essere definita come una superficie parametrica dove la posizione del generico punto \( \vec{P} \), funzione di coordinate parametriche
+		<p>Una superficie di Bézier è una particolare <i>spline matematica</i> usata nella computer grafica e nel CAD per rappresentare superfici curve in maniera matematicamente conveniente. 
+		In analisi matematica, una spline è una funzione, costituita mediante un insieme di <i>polinomi</i> opportunamente composti, il cui scopo è quello di interpolare un intervallo di punti 
+		in modo che la funzione sia <i>continua</i> almeno fino ad un dato ordine di derivate in ogni punto dell'intervallo di definizione.<br><br>
+		La generica <b>superficie di Bézier</b> di bigrado \( (h,k) \) può essere definita come una <i>superficie parametrica</i> dove la posizione del generico punto \( \vec{P} \), funzione di coordinate parametriche
 		\( u,v \) è viene definita come segue:
 		$$ \vec{P}(u,v) = \sum_{i=0}^{h} \sum_{j=0}^{k}{B^{h}_i} (u) {B^{k}_j} (v) \vec{P_{i,j}}  $$
 		
 		<h2><strong>Cosa descrive una superficie di Bézier?</strong></h2>
-		<p>Una superficie di Bézier è una funzione di due variabili \( (h,k) \) definita sul quadrato unitario del piano \( uv \) e avente valori in \( \mathbb{E}^3 \), lo spazio affine. Ciò significa:
+		<p>Una superficie di Bézier è una funzione di due variabili \( (h,k) \) definita sul <b>quadrato unitario</b> del piano \( uv \) e avente valori in \( \mathbb{E}^3 \), lo <i>spazio affine</i>. Ciò significa:
 		$$ \vec{P}(u,v): [0,1] \times [0,1] \to \mathbb{E}^3 $$
 		<br>
-		Essa è descritta da un insieme di punti di controllo &nbsp &nbsp \( \{\vec{P_{i,j}}\}^{i = 0,...,h}_{j = 0,...,k} \)  &nbsp &nbsp con \( h \geq 1 , k \geq 1 \) che rappresentano il <strong>poliedro di controllo</strong>. 
-		L'idea che sta alla base della teoria di Bézier è di definire l'intera superficie a partire da questo insieme finito di punti, in modo che il suo supporto ne segua l'andamento. <br> <br>
+		Essa è descritta da un insieme di <i>punti di controllo</i> &nbsp &nbsp \( \{\vec{P_{i,j}}\}^{i = 0,...,h}_{j = 0,...,k} \)  &nbsp &nbsp con \( h \geq 1 , k \geq 1 \) che rappresentano il <strong>poliedro di controllo</strong>. 
+		L'idea che sta alla base della teoria di Bézier è di definire l'intera superficie a partire da questo <i>insieme finito di punti</i>, in modo che il suo supporto ne <i>segua l'andamento</i>. <br> <br>
 		
 		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 		<img src="img/poliedro.png" alt="Poliedro di Controllo" width="300" height="295"> <br>
 		
-		La coppia  \( (h,k) \) è detta <strong>bigrado</strong> della superficie di Bézier e ne determina la quantità \( (h+1) \cdot (k+1) \) di punti del poliedro di controllo. <br>
+		La coppia  \( (h,k) \) è detta <strong>bigrado</strong> della superficie di Bézier e ne determina la <i>quantità</i> \( (h+1) \cdot (k+1) \) di punti del poliedro di controllo. <br>
 		Gli ultimi elementi che descrivono la superficie di Bézier nella sua forma generica vista precedentemente sono i <strong>polinomi di Bernstein</strong>  \( {B^{n}_i} (u) \). Questi rappresentano i 
-		<i>pesi</i>, come coefficienti polinomiali, da dare ai punti di controllo in ogni punto del piano \( uv \) per descrivere la superficie di Bézier nello spazio \( \mathbb{E}^3 \). <br>
+		<i>pesi</i>, come <b>coefficienti polinomiali</b>, da dare ai punti di controllo in ogni punto del piano \( uv \) per descrivere la superficie di Bézier nello spazio \( \mathbb{E}^3 \). <br>
 		Tali polinomi possono essere scritti come:
 		
 		$$ {B^{n}_i} (u) = \binom n i u^i (1-u)^{n-i}\mspace25pt\text{con:}\mspace25pt \binom n i = \frac{n!}{i!(n-i)!}$$
 		
-		<h5><strong>Oss.</strong> Le superfici di Bézier furono descritte per la prima volta nel 1962 dall'ingegnere francese <a href="https://it.wikipedia.org/wiki/Pierre_Bézier"><strong>Pierre Bézier</strong></a>, che le utilizzò per progettare carrozzerie di 
+		<h5><strong>Oss.</strong> Le superfici di Bézier furono descritte per la prima volta nel 1962 dall'ingegnere francese <a href="https://it.wikipedia.org/wiki/Pierre_Bézier"><strong>Pierre Bézier</strong></a>, che le utilizzò per progettare <i>carrozzerie</i> di 
 		automobile. Le superfici di Bézier possono essere di qualunque bigrado, ma quelle bicubiche \( (h=k=3) \) generalmente forniscono abbastanza <b>gradi di libertà</b> per la maggior parte delle applicazioni.</h5>
 		<h5><strong>Oss.</strong> Nonostante le superfici di Bézier siano state introdotte partendo da fogli semplici di superficie e mostrando la corrispondenza tra <i>quadratiche a sella</i> e superficie di Bézier
 		di bigrado \( (1,1) \) non tutte le superfici di Bézier rappresentano fogli semplici di superficie.</h5>
 		</p>
 		
 		<h2><strong>Esiste un procedimento per valutare una superficie di Bézier?</strong></h2>
-		<p>Un algoritmo operativo presentato a lezione per ottenere tutti i punti di una superficie di Bézier consiste nell'<a href="https://it.wikipedia.org/wiki/Algoritmo_di_de_Casteljau"><strong>Algoritmo di de Casteljau</strong></a>.
-		Esso rappresenta un metodo ricorsivo per valutare i polinomi di Bernstein visti pocanzi ed è una diretta estensione del medesimo algoritmo presentato a lezione per le curve di Bézier. <br></p>
+		<p>Un algoritmo operativo presentato a lezione per <i>ottenere tutti i punti</i> di una superficie di Bézier consiste nell'<a href="https://it.wikipedia.org/wiki/Algoritmo_di_de_Casteljau"><strong>Algoritmo di de Casteljau</strong></a>.
+		Esso rappresenta un metodo <b>ricorsivo</b> per valutare i polinomi di Bernstein visti pocanzi ed è una diretta estensione del medesimo algoritmo presentato a lezione per le curve di Bézier. <br></p>
 		
-		<h3>L'algoritmo:</h3>
+		<h3><i>L'algoritmo:</i></h3>
 		<p>Scegliamo come dominio di definizione il quadrato unitario \( [0,1] \times [0,1] \) del piano \( uv \) e fissiamo gli \( (h+1) \cdot (k+1) \) punti \( P_{0,0},...,P_{h,k} \in \mathbb{E}^3 \) del poliedro di
 		controllo.<br>Fissiamo \( (\bar{u},\bar{v}) \) nel dominio di definizione della superficie di Bézier e cerchiamo di descrivere come ottenere il punto \( P(\bar{u},\bar{v}) \) immagine sulla superficie.<br>
 		Consideriamo il poliedro di controllo \( \{ P_{0,0},P_{h,0},P_{0,1},P_{h,1},...,P_{h,k} \} \); nella formulazione dell'algoritmo di de Casteljau questi punti si considerano disposti su una <b>griglia combinatoria</b>
-		che suddividerà il poliedro di controllo in \( h \cdot k \) quadrilateri \( q_{i,j}\) di vertici 
+		che suddividerà il poliedro di controllo in \( h \cdot k \) <i>quadrilateri</i> \( q_{i,j}\) di vertici 
 		\( \{ P_{i,j},P_{i+1,j},P_{i,j+1},P_{i+1,j+1} \}^{i = 0,1,...,h-1}_{j = 0,1,...,k-1} \).<br> Per ciascuno di questi quadrilateri dobbiamo ottenere un nuovo punto, che chiameremo \( P^1_{i,j} \), verificando 
 		le seguenti identità tra <b>rapporti semplici</b>:
 		<ol>
@@ -83,58 +83,58 @@
 		<li> da \( (0, \bar{v}, 1) = ( A_i,P^1_{i,j},A_{i+1}) \) ricaviamo \( P^1_{i,j} \)</li>
 		</ol>
 		</p>
-		<p>Così facendo abbiamo ottenuto \( h \cdot k \) <b>nuovi</b> punti che descrivono un nuovo poliedro di controllo \( \{ P^1_{0,0},...,P^1_{h-1,k-1} \} \) che chiamiamo poliedro di <i>1° livello</i>.<br>
+		<p>Così facendo abbiamo ottenuto \( h \cdot k \) <b>nuovi punti</b> che descrivono un nuovo poliedro di controllo \( \{ P^1_{0,0},...,P^1_{h-1,k-1} \} \) che chiamiamo poliedro di <i>1° livello</i>.<br>
 		Ripetendo questo procedimento in maniera ricorsiva otterremo \( (h-1) \cdot (k-1) \) nuovi punti che descrivono il poliedro di controllo di <i>2° livello</i> e così via. <br>
 		L'algoritmo di de Casteljau terminerà al livello \( r = max(h,k) \) con il punto \( P^r_{0,0}\) che corrisponderà al punto \( P(\bar{u},\bar{v}) \) , ovvero il punto della superficie di Bézier per la coppia 
 		\( (\bar{u},\bar{v}) \) fissata all'inizio.
 		<br>
-		<h5><strong>Oss.</strong>L'algoritmo di de Casteljau è definito solo per \( h=k \) ma abbiamo discusso a lezione come sia possibile estenderlo nel caso più generico \( h \ne k \) utilizzando la tecnica dell'innalzamento
-		di grado laddove serve. Per una visualizzazione grafica dell'algoritmo di de Casteljau rimandiamo a questa <a href="http://www.mat.unimi.it/users/alzati/Geometria_Computazionale_98-99/apps/Superfici/Tavola_1.html">pagina del corso</a>. </h5>
+		<h5><strong>Oss.</strong>L'algoritmo di de Casteljau è definito solo per \( h=k \) ma abbiamo discusso a lezione come sia possibile estenderlo nel caso più generico \( h \ne k \) utilizzando la <b>tecnica dell'innalzamento
+		di grado</b> laddove serve. Per una visualizzazione grafica dell'algoritmo di de Casteljau rimandiamo a questa <a href="http://www.mat.unimi.it/users/alzati/Geometria_Computazionale_98-99/apps/Superfici/Tavola_1.html">pagina del corso</a>. </h5>
 		</p>
 		
 		<h2><strong>Quali sono i vantaggi e gli svantaggi nell'utilizzo del formalismo delle superfici di Bézier al computer?</strong></h2>
-		<p><br>I principali vantaggi nell'utilizzo delle superficie di Bézier in computer grafica sono:
+		<p><br>I principali <i>vantaggi</i> nell'utilizzo delle superficie di Bézier in computer grafica sono:
 		<ul>
-		<li>Una superficie di Bézier si trasformerà allo stesso modo dei suoi punti di controllo se essi vengono trasformati mediante <b>affinità</b>. Per applicare una affinità all'intera superficie, quindi
-		basterà applicarla ai soli punti di controllo.</li>
+		<li>Una superficie di Bézier si trasformerà allo stesso modo dei suoi <i>punti di controllo</i> se essi vengono trasformati mediante <b>affinità</b>. Per applicare una affinità all'intera superficie, quindi
+		basterà applicarla ai soli <i>punti di controllo</i>.</li>
 		<li>L'intera superficie è sempre contenuta nell'<b>involucro convesso</b> individuato dai punti del poliedro di controllo.</li>
-		<li>Tutte le linee \( u = costante \) e \( v = costante \) rappresentano delle curve di Bezier. In particolare, i punti corrispondenti agli angoli del quadrato unitario dell'insieme di definizione della superficie
-		corrispondono anche a quattro dei punti di controllo della superficie stessa. Inoltre, il bordo delle superfici di Bezier è dato descritto dalle poligonali che formano il bordo del poliedro di controllo.
+		<li>Tutte le linee \( u = costante \) e \( v = costante \) rappresentano delle <b>curve di Bézier</b>. In particolare, i punti corrispondenti agli angoli del <i>quadrato unitario</i> dell'insieme di definizione della superficie
+		corrispondono anche a quattro dei <i>punti di controllo</i> della superficie stessa. Inoltre, il bordo delle superfici di Bézier è dato descritto dalle <b>poligonali</b> che formano il bordo del poliedro di controllo.
 		</li>
-		<li>vale la <b>proprietà di suddivisione</b>: preso un valore specifico di  \( u \)  o di  \( v \) esso identifica due “sottosuperfici” che sono anch'esse descrivibili con il formalismo delle superfici di Bézier </li>
-		<li>se tutti i punti del poliedro di controllo sono complanari ed equamente distanziati il foglio è una porzione di piano.</li>
+		<li>vale la <b>proprietà di suddivisione</b>: preso un valore specifico di  \( u \)  o di  \( v \) esso identifica due <i>sottosuperfici</i> che sono anch'esse descrivibili con il formalismo delle <i>superfici di Bézier</i> </li>
+		<li>se tutti i punti del poliedro di controllo sono complanari ed equamente distanziati il foglio è una <b>porzione di piano</b>.</li>
 		</ul>
 		</p>
-		<p>Gli svantaggi sono invece:
+		<p>Gli <i>svantaggi</i> sono invece:
 		<ul>
-		<li>Possiamo manipolare il poliedro di controllo per ottenere una superficie <i>desiderabile</i> senza però avere un controllo locale, cioè le variazioni di un solo punto del poliedro di controllo portano ad un
-		<i>rilevante</i> cambiamento dell'intera superficie. Inoltre la variazione di un solo punto del poliedro di controllo implica dover ricalcolare l'intera superficie di Bézier.</li>
-		<li>Questo formalismo non è adatto a risolvere problemi di interpolazione di una griglia di punti, ovvero risulta molto difficile definire una superficie di Bézier che passa per un insieme di punti dati.</li>
-		<li>Per rappresentare superfici complesse, come per esempio superfici molto ondulate, abbiamo bisogno di bigradi alti, che costringono il computer a lavorare con polinomi sempre più complessi, degradando quindi le prestazioni.</li>
-		<li>Non si possono rappresentare sfere, calotte sferiche e superfici di rotazione con questo formalismo.</li>
-		<li>Calcolare l'intersezione di superfici di Bézier con enti lineari non è semplice.</li>
+		<li>Possiamo manipolare il poliedro di controllo per ottenere una superficie <i>desiderabile</i> <b>senza</b> però avere un <b>controllo locale</b>, cioè le variazioni di un solo punto del poliedro di controllo portano ad un
+		<i>rilevante</i> cambiamento dell'intera superficie. Inoltre la variazione di <i>un solo punto</i> del poliedro di controllo implica dover <i>ricalcolare l'intera superficie</i> di Bézier.</li>
+		<li>Questo formalismo non è adatto a risolvere <b>problemi di interpolazione</b> di una griglia di punti, ovvero risulta molto difficile definire una superficie di Bézier <i>che passa</i> per un insieme di punti dati.</li>
+		<li>Per rappresentare <b>superfici complesse</b>, come per esempio superfici molto ondulate, abbiamo bisogno di <b>bigradi alti</b>, che costringono il computer a lavorare con <i>polinomi sempre più complessi</i>, degradando quindi le <i>prestazioni</i>.</li>
+		<li>Non si possono rappresentare <i>sfere, calotte sferiche e superfici di rotazione</i> con questo formalismo.</li>
+		<li>Calcolare l'<i>intersezione</i> di superfici di Bézier con <i>enti lineari</i> non è semplice.</li>
 		</ul>
 		</p>
-		<p>Considerando gli svantaggi appena descritti, le superficie di Bézier vengono spesso usate in computer grafica come <b>reti di patch bicubiche</b> ovvero come insiemi di superfici con \( (h=k=3) \) 
-		   opportunamente incollate tra loro. <br>Questo permette di definire una singola patch bicubica utilizzando solamente 16 punti di controllo, permettendo di lavorare con polinomi semplici, garantendo maggior
-		   controllo locale e approssimando con pochi numeri di patch bicubiche superfici come sfere e cilindri. <br>
-		   Tuttavia, resta ancora un problema il calcolo di intersezione di superfici di Bézier con enti lineari ad esempio le rette; Questo problema è spesso affrontato durante il <i>raytracing</i> di mesh realizzate come incollamenti di 
-		   patch di Bézier e viene risolto solo con decomposizione della mesh in triangoli.
+		<p>Considerando gli svantaggi appena descritti, le superficie di Bézier vengono spesso usate in computer grafica come <b>reti di patch bicubiche</b> ovvero come <i>insiemi di superfici</i> con \( (h=k=3) \) 
+		   opportunamente <i>incollate tra loro</i>. <br>Questo permette di definire una singola patch bicubica utilizzando solamente 16 punti di controllo, permettendo di lavorare con <b>polinomi semplici</b>, garantendo maggior
+		<i>controllo locale</i> e approssimando con pochi numeri di patch bicubiche superfici come <i>sfere e cilindri</i>. <br>
+		   Tuttavia, resta ancora un problema calcolare l'intersezione di superfici di Bézier con <i>enti lineari</i>, quali, ad esempio, le rette. Questo problema è spesso affrontato durante il <i>raytracing</i> di mesh realizzate come incollamenti di 
+		   patch di Bézier e viene risolto solo con <i>decomposizione della mesh</i> in triangoli nella fase di rendering.
 		</p>
 		<h2><strong>Scelte progettuali adottate nella realizzazione di BezierSplit</strong></h2>
-		<p>Durante la realizzazione del progetto abbiamo scelto di generare proceduralmente, per ogni livello, delle superfici di Bézier di bigrado fissato \( (h=k=3) \).<br> <br>
-		Inizialmente viene generata una griglia di 16 punti di controllo complanari, che verranno spostati in maniera casuale, dipendentemente anche dalla difficoltà, sommando o sottraendo del rumore a ciascun punto.<br>
-		Successivamente circa 10.000 punti \( P_{u,v} \) della superficie di Bézier vengono valutati in maniera discreta, suddividendo gli intervalli \( [0,1] \) in 100 sottointervalli, valutando quindi 
-		\( 100 \times 100 \) punti del piano.<br> Questi punti verranno poi organizzati per essere visualizzati come triangoli della mesh creata.<br><br>
-		Di seguito mostriamo il codice in <b>C#</b> realizzato per poter valutare la superficie di Bézier \( \vec{P}(u,v) = \sum_{i=0}^{h} \sum_{j=0}^{k}{B^{h}_i} (u) {B^{k}_j} (v) \vec{P_{i,j}} \) nel caso specifico
-		di bigrado \( (h=k=3) \). <br><br>
+		<p>Durante la realizzazione del progetto abbiamo scelto di <b>generare proceduralmente</b>, per ogni livello, delle superfici di Bézier di <i>bigrado fissato</i> \( (h=k=3) \).<br> <br>
+		Inizialmente viene generata una griglia di 16 punti di controllo <i>complanari</i>, che verranno spostati in maniera <i>casuale</i>, dipendentemente anche dalla <i>difficoltà</i>, sommando o sottraendo del <i>rumore</i> a ciascun punto.<br>
+		Successivamente la superficie di Bézier viene <b>valutata in maniera discreta</b> calcolandone circa 10.000 punti \( P_{u,v} \)  suddividendo gli intervalli \( [0,1] \) in <i>100 sottointervalli</i>, computando quindi 
+		\( 100 \times 100 \) punti del piano.<br> Questi punti verranno poi <i>organizzati</i> per essere visualizzati come triangoli della mesh creata.<br><br>
+		Di seguito mostriamo il codice in <b>C#</b> realizzato per poter valutare la <i>superficie di Bézier</i> \( \vec{P}(u,v) = \sum_{i=0}^{h} \sum_{j=0}^{k}{B^{h}_i} (u) {B^{k}_j} (v) \vec{P_{i,j}} \) nel caso specifico
+		di <i>bigrado</i> \( (h=k=3) \). <br><br>
 		<img src="img/bezier.jpg" alt="Funzione_P_uv"><img src="img/poly.jpg" alt="Polinomi_Bernstein_caso3">
-		<br><br>Notiamo come, per efficienza, abbiamo scelto di pre-calcolare i valori dei 4 polinomi di Bernstein per il caso  \( (n=3) \) , rendendo più semplice la scrittura del codice senza introdurre le funzioni
-		fattoriale generalmente utilizzate.
+		<br><br>Notiamo come, per efficienza, abbiamo scelto di <b>pre-calcolare</b> i valori dei 4 <b>polinomi di Bernstein</b> per il caso  \( (n=3) \) , rendendo più <i>semplice la scrittura del codice</i> senza introdurre le <i>funzioni
+		fattoriale</i> presenti nella formulazione generale.
 		</p>
 		<p>
-		Il calcolo del volume, invece, è stato approssimato come somma dei piccoli parallelepipedi, aventi base pari al quadrato di lato \( \frac{1}{100} = 0,01 \) e altezza variabile a seconda dei punti \( P_{u,v} \)
-		calcolati precedentemente.
+		Il <b>calcolo del volume</b>, invece, è stato <i>approssimato</i> come <b>somma di piccoli parallelepipedi</b>, aventi base pari alla dimensione dei sottoinvervalli precalcolati, ovvero quadrati di lato \( \frac{1}{100} = 0,01 \) e <i>altezza variabile</i> a seconda dei punti \( P_{u,v} \)
+		calcolati precedentemente.<br>
 		&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
 		<img src="img/volume.jpg" alt="Calcolo volume">
 		</p>
