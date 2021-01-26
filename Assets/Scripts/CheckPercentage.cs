@@ -41,7 +41,7 @@ public class CheckPercentage : MonoBehaviour
     {
         _winPanel.SetActive(true);
         int perc = FindObjectOfType<CubeAdjust>().percentage;
-        _winPerc.SetText("La percentuale era: " + perc + "%");
+        _winPerc.SetText("La percentuale era: " + perc + "%-" + (100-perc) + "%");
     }
 
     public void EnableRetryMessage()
@@ -53,6 +53,6 @@ public class CheckPercentage : MonoBehaviour
     {
         _restartPanel.SetActive(true);
         int perc = FindObjectOfType<CubeAdjust>().percentage;
-        _losePerc.SetText("La percentuale era: " + perc + "%");
+        _losePerc.SetText("La percentuale era: " + perc + "%-" + (100 - perc) + "%");
     }
 }
