@@ -37,7 +37,12 @@
 		<h2><b>Scopo del Gioco</b></h2>
     <p>In <strong>BézierSplit</strong>, il giocatore si troverà di fronte ad un parallelepipedo suddiviso in due da una superficie di Bézier, e dovrà cercare di 
       indovinare il punto in cui tale suddivisione avviene descrivendo quanta percentuale del volume complessivo del parallelepipedo sia presente nella 
-      parte sopra e quale nella parte sotto (una ovviamente implica direttamente l'altra).<br><br>
+      parte sopra e quanta nella parte sotto (una ovviamente implica direttamente l'altra).<br><br>
+      Il gioco finisce solo quando l'utente perde tutte le vite disponibili ma può potenzialmente andare avanti all'<strong>infinito</strong> fintanto che il giocatore riesce
+      a indovinare la corretta suddivisione. Questo perchè ogni livello è generato proceduralmente e con un sistema di difficoltà crescenti. Tutto dipende 
+      quindi dalla bravura dell'utente nell'indovinare la corretta suddivisione dei volumi senza perdere vite.<br>
+      Lo scopo del gioco è quello di <b>stabilire punteggi sempre maggiori</b>, migliorando il proprio punteggio massimo e la propria capacità di intuire 
+      le corrette suddivisioni ispezionando il parallelepipedo proposto. <br><br>
       <img src="img/bs_main_menu.PNG" alt="main menu" width="780" height="420">
       <br><br>
     </p>
@@ -49,6 +54,7 @@
       trascinamento</strong>.
       <br><br>
       <strong>Nota:</strong> Le soluzioni opposte sono considerate equivalenti (es. 40%-60% è cosiderata uguale a 60%-40%)<br><br>
+
       Per poter analizzare meglio il solido prima di fornire una risposta, il giocatore può ruotare a piacimento la figura tramite <strong>click sinistro 
       del mouse e trascinamento</strong> in un punto qualsiasi della schermata di gioco, inoltre, cliccando sul pulsante "Strumenti Aggiuntivi", si
       aprirà una finestra con delle opzioni di analisi aggiuntive che possono essere attivate o disattivate a piacimento. Tali opzioni sono:<br>
@@ -58,7 +64,10 @@
       <li><strong>Superficie intera</strong>: Per visualizzare una versione estesa della superficie presente nel solido;</li>
       <li><strong>Approssimazione volume</strong>: Per colorare una delle due parti in cui il solido è stato suddiviso, evidenziandone il volume.</li>
     </ul>
-    <p>Durante il gioco è possibile premere il tasto <b>esc</b> della tastiera per visualizzare un menù da cui il giocatore può tornare alla schermata
+    <p>
+      <strong>Nota:</strong> Per gli utenti Apple, avendo un unico tasto a disposizione sul mouse, bisognerà cliccare quest'ultimo utilizzando
+    entrambe le dita (riproducendo l'effetto del click sinistro). <br><br>
+      Durante il gioco è possibile premere il tasto <b>esc</b> della tastiera per visualizzare un menù da cui il giocatore può tornare alla schermata
       principale del gioco (Attenzione: tornare al menù principale del gioco comporta la perdita dei progressi correnti).</p>
     <br>
 
@@ -77,9 +86,10 @@
       <li><strong>Difficile (livelli 10-14)</strong>: Una difficoltà avanzata del gioco, con superfici di discreta complessità e un tasso di tolleranza sugli errori del 2%;</li>
       <li><strong>Impossibile (livelli 15+)</strong>: La massima difficoltà del gioco, con superfici di alta complessità e un tasso di tolleranza sugli errori del 1%.</li>
     </ul>
-    <p>Se viene inserita una suddivisione errata, il giocatore perderà una vita (3 disponibili durante l'intera sessione) e potrà riprovare ad
-      indovinare la suddivisione del solido corrente, tuttavia, una volta esaurite le vite disponibili, l'errore portera al "Game Over", con conseguente
-      azzeramento del punteggio corrente e della difficoltà. <br></br>
+    <p>Se viene inserita una suddivisione errata, il giocatore perderà una vita (3 disponibili per ogni partita) e potrà riprovare ad
+      indovinare la suddivisione del solido corrente. Tuttavia, una volta esaurite le vite disponibili, l'errore portera al "Game Over" con conseguente
+      fine della partita, azzeramento del punteggio corrente e della difficoltà. L'utente, se vorrà, potrà effettuare una nuova partita avendo nuovamente a disposizione
+      3 vite, ripartendo dal punteggio di 0 e dalla difficoltà Facile.<br></br>
       &nbsp
       <img src="img/bs_correct_screen.PNG" width="230" height="120" alt="win screen">
       &nbsp &nbsp &nbsp
@@ -87,7 +97,9 @@
       &nbsp &nbsp &nbsp
       <img src="img/bs_failure_screen.PNG" width="230" height="120" alt="lose screen"> 
       <br><br>
-      <b>Nota:</b> Verrà comunque memorizzato il valore di punteggio della sessione di gioco migliore.<br><br>
+      <b>Nota:</b> Verrà comunque memorizzato il valore di punteggio della sessione di gioco migliore. Con sessione di gioco intendiamo un insieme
+      di partite (grande a piacere) effettuate consecutivamente senza uscire dall'applet. Il miglior punteggio ottenuto durante questo insieme di partite 
+      sarà visibile sotto la dicitura "High Score" fintanto che l'utente resterà sulla pagina dell'applet.<br><br>
     </p>
 
     <h2><b>L'Interfaccia di Gioco</b></h2>
