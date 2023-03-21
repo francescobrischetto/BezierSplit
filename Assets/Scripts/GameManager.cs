@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform _sceneCenter;
     [SerializeField] private GameObject _surfacePrefab;
     [SerializeField] private GameObject _exitWindow;
+    [SerializeField] private AdditionalToolsWindow _additionalToolWindow;
 
     private void Start()
     {
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        _additionalToolWindow.ResetRightPanel();
         Destroy(_currentSurface);
 
         _currentLevel += 1;
@@ -71,7 +73,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        if(_currentSurface != null)
+        _additionalToolWindow.ResetRightPanel();
+        if (_currentSurface != null)
             Destroy(_currentSurface);
 
         _currentLevel = 0;
