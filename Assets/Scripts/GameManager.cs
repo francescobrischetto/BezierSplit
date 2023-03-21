@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,11 +30,10 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        _livesText.SetText("Vite: " + _lives);
 
         if (Input.GetButtonDown("Cancel"))
         {
-            Debug.Log("Button pressed");
+            UnityEngine.Debug.Log("Button pressed");
             if (_exitWindow.activeSelf)
                 _exitWindow.SetActive(false);
             else
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
 
         _currentLevel = 0;
         _lives = 3;
+        _livesText.SetText("Vite: " + _lives);
         _currentScoreText.SetText("Score: " + _currentLevel);
 
         if (_currentLevel >= _highScore)
@@ -94,10 +95,18 @@ public class GameManager : MonoBehaviour
         bool check = FindObjectOfType<CheckPercentage>().correct;
         if (check)
             LoadNextLevel();
-        else if (!check && _lives > 0)
-            _lives--;
         else
-            RestartGame();
+        {
+            _lives--;
+            _livesText.SetText("Vite: " + _lives);
+            if (_lives <= 0)
+                RestartGame();
+        }   
+    }
+
+    public void SetLivesToZero()
+    {
+        _livesText.SetText("Vite: 0");
     }
 
     IEnumerator DelayTimer()

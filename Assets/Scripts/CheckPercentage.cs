@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,10 +31,15 @@ public class CheckPercentage : MonoBehaviour
         else
         {
             correct = false;
-            if (FindObjectOfType<GameManager>()._lives > 0)
+            if (FindObjectOfType<GameManager>()._lives > 1)
                 EnableRetryMessage();
             else
+            {
+                UnityEngine.Debug.Log("FATTO");
+                _manager.SetLivesToZero();
                 EnableRestartMessage();
+            }
+                
         }
     }
 

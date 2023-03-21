@@ -13,7 +13,11 @@ public class PercentageCheat : MonoBehaviour
 
     void Start()
     {
-        _active = FindObjectOfType<CheatMode>()._cheatMode;
+        if(FindObjectOfType<CheatMode>() != null)
+        {
+            _active = FindObjectOfType<CheatMode>()._cheatMode;
+        }
+        
 
         if (_active)
         {
